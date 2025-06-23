@@ -1,8 +1,102 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f2fff5;
+  --foreground: #011d07;
+  --color-primary: #011d07;
+  --color-secondary: #f2fff5;
+  --color-accent: #fab226;
+  --color-muted: #831117;
+}
+
+/* Metropolis Regular */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-Regular.otf") format("opentype");
+
+  font-style: normal;
+}
+
+/* Metropolis Italic */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-RegularItalic.otf") format("opentype");
+
+  font-style: italic;
+}
+
+/* Metropolis SemiBold */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-SemiBold.otf") format("opentype");
+
+  font-style: normal;
+}
+
+/* Metropolis SemiBold Italic */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-SemiBoldItalic.otf") format("opentype");
+
+  font-style: italic;
+}
+
+/* Font families */
+.font-metro-regular {
+  font-family: "Metropolis", sans-serif;
+
+  font-style: normal;
+}
+.font-metro-italic {
+  font-family: "Metropolis", sans-serif;
+
+  font-style: italic;
+}
+.font-metro-semibold {
+  font-family: "Metropolis", sans-serif;
+}
+.font-metro-semibold-italic {
+  font-family: "Metropolis", sans-serif;
+
+  font-style: italic;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.text-muted {
+  color: var(--color-muted);
+}
+.text-background {
+  color: var(--color-background);
+}
+.text-foreground {
+  color: var(--color-foreground);
+}
+
+.bg-primary {
+  background-color: var(--color-background);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+.bg-muted {
+  background-color: var(--color-muted);
+}
+.bg-background {
+  background-color: var(--color-background);
+}
+.bg-foreground {
+  background-color: var(--color-foreground);
 }
 
 @theme inline {
@@ -14,8 +108,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f2fff5;
+    --foreground: #011d07;
   }
 }
 
