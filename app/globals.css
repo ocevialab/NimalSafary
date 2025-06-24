@@ -1,5 +1,84 @@
+/* 🎨 Define All Metropolis Font Faces */
+/* Thin (100) */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular (400) */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular Italic (400 italic) */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-RegularItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Medium (500) */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* SemiBold (600) */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (700) */
+@font-face {
+  font-family: "Metropolis";
+  src: url("/Fonts/metropolis/Metropolis-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tailwind base import */
 @import "tailwindcss";
 
+/* 🎯 Theme Variables for Color & Fonts */
+@theme inline {
+  /* Color palette */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-muted: var(--color-muted);
+
+  /* Font families – tailwind will generate font-display, font-body, font-sans */
+  --font-display: "Metropolis", sans-serif;
+  --font-body: "Metropolis", sans-serif;
+}
+
+/* CSS Color Variables */
 :root {
   --background: #f2fff5;
   --foreground: #011d07;
@@ -9,103 +88,7 @@
   --color-muted: #831117;
 }
 
-/* Metropolis Regular */
-@font-face {
-  font-family: "Metropolis";
-  src: url("/Fonts/metropolis/Metropolis-Regular.otf") format("opentype");
-
-  font-style: normal;
-}
-
-/* Metropolis Italic */
-@font-face {
-  font-family: "Metropolis";
-  src: url("/Fonts/metropolis/Metropolis-RegularItalic.otf") format("opentype");
-
-  font-style: italic;
-}
-
-/* Metropolis SemiBold */
-@font-face {
-  font-family: "Metropolis";
-  src: url("/Fonts/metropolis/Metropolis-SemiBold.otf") format("opentype");
-
-  font-style: normal;
-}
-
-/* Metropolis SemiBold Italic */
-@font-face {
-  font-family: "Metropolis";
-  src: url("/Fonts/metropolis/Metropolis-SemiBoldItalic.otf") format("opentype");
-
-  font-style: italic;
-}
-
-/* Font families */
-.font-metro-regular {
-  font-family: "Metropolis", sans-serif;
-
-  font-style: normal;
-}
-.font-metro-italic {
-  font-family: "Metropolis", sans-serif;
-
-  font-style: italic;
-}
-.font-metro-semibold {
-  font-family: "Metropolis", sans-serif;
-}
-.font-metro-semibold-italic {
-  font-family: "Metropolis", sans-serif;
-
-  font-style: italic;
-}
-
-.text-primary {
-  color: var(--color-primary);
-}
-.text-secondary {
-  color: var(--color-secondary);
-}
-.text-accent {
-  color: var(--color-accent);
-}
-.text-muted {
-  color: var(--color-muted);
-}
-.text-background {
-  color: var(--color-background);
-}
-.text-foreground {
-  color: var(--color-foreground);
-}
-
-.bg-primary {
-  background-color: var(--color-background);
-}
-.bg-secondary {
-  background-color: var(--color-secondary);
-}
-.bg-accent {
-  background-color: var(--color-accent);
-}
-.bg-muted {
-  background-color: var(--color-muted);
-}
-.bg-background {
-  background-color: var(--color-background);
-}
-.bg-foreground {
-  background-color: var(--color-foreground);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* 🔄 Optional: Dark mode variables */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #f2fff5;
@@ -113,8 +96,8 @@
   }
 }
 
+/* 🔧 Base Styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
