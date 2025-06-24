@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 function Nav() {
   return (
-    <nav className="w-full justify-between flex items-center font-display font-medium text-lg relative text-secondary z-10 top-0 md:px-12 h-full md:py-6">
+    <nav className="w-full justify-between flex items-center font-display font-medium text-[20px] relative text-secondary z-10 top-0 md:px-12 h-full md:py-6">
       <Image
         src={"/images/logo.png"}
         width={50}
