@@ -4,10 +4,8 @@ import Nav from "./Components/Nav";
 export default function Home() {
   return (
     <>
-      <body className="">
-        <Nav />
-        <Hero />
-      </body>
+      <Nav />
+      <Hero />
     </>
   );
 }
