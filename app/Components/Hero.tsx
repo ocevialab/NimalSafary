@@ -11,7 +11,7 @@ function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="flex justify-between items-end absolute w-full bottom-0 md:px-12 h-full md:py-8">
+      <div className="flex justify-between items-end font-display absolute w-full bottom-0 md:px-12 h-full md:py-8">
         <div className="w-2/5 h-fit  flex flex-col gap-2">
           <h1 className="text-7xl font-display font-semibold tracking-wide leading-18">
             Experience the <span className="text-accent">Wild</span> Like Never
