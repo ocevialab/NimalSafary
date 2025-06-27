@@ -30,7 +30,7 @@ export default function Hero() {
             Before
           </motion.h1>
           <motion.p
-            className="md:text-md text-sm pr-24"
+            className="md:text-md text-sm lg:pr-24 md:pr-12 pr-6 "
             initial={{ opacity: 0, y: 50 }}
             whileInView={{
               opacity: 1,
@@ -46,7 +46,7 @@ export default function Hero() {
             national parks.
           </motion.p>
           <motion.div
-            className="px-8 py-2 bg-accent text-muted font-medium rounded-lg w-fit cursor-pointer"
+            className="md:px-8 px-4 md:py-2 py-1 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-sm cursor-pointer"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             initial={{ opacity: 0, y: 50 }}
@@ -86,11 +86,15 @@ export default function Hero() {
                 alt="traveladvisorlog"
                 className="w-6 h-6 opacity-80"
               />
-              <h2 className="text-xl font-bold text-secondary ">Tripadvisor</h2>
-              <p className="text-xl font-bold text-accent">4.7</p>
+              <h2 className="md:text-xl text-lg font-bold text-secondary ">
+                Tripadvisor
+              </h2>
+              <p className="md:text-xl text-lg font-bold text-accent">4.7</p>
             </div>
-            <div className=" text-secondary text-sm mt-4">Sarah F</div>
-            <div className="text-sm  font-light w-[300px] text-secondary  ">
+            <div className=" text-secondary md:text-sm text-xs md:mt-4 mt-1">
+              Sarah F
+            </div>
+            <div className="md:text-sm text-xs  font-light md:w-[300px] w-full text-secondary  ">
               It was an amazing experience! We had a great driver and a lot of
               luck - got to see teo leopards, elephants, water buffalos,
               different deers and birds and a crocodile. The landscape is
