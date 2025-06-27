@@ -30,7 +30,7 @@ export default function Hero() {
             Before
           </motion.h1>
           <motion.p
-            className="md:text-md text-sm lg:pr-24 md:pr-12 pr-6 "
+            className="md:text-md text-xs lg:pr-24 md:pr-12 pr-6 "
             initial={{ opacity: 0, y: 50 }}
             whileInView={{
               opacity: 1,
@@ -94,7 +94,7 @@ export default function Hero() {
             <div className=" text-secondary md:text-sm text-xs md:mt-4 mt-1">
               Sarah F
             </div>
-            <div className="md:text-sm text-xs  font-light md:w-[300px] w-full text-secondary  ">
+            <div className="md:text-sm text-xs font-light md:w-[300px] w-full text-secondary md:line-clamp-none line-clamp-3">
               It was an amazing experience! We had a great driver and a lot of
               luck - got to see teo leopards, elephants, water buffalos,
               different deers and birds and a crocodile. The landscape is
