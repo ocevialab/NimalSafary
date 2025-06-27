@@ -30,7 +30,7 @@ export default function Hero() {
             Before
           </motion.h1>
           <motion.p
-            className="md:text-md text-xs lg:pr-24 md:pr-12 pr-6 "
+            className="lg:text-xl  md:text-lg text-xs lg:pr-24 md:pr-12 pr-6 "
             initial={{ opacity: 0, y: 50 }}
             whileInView={{
               opacity: 1,
