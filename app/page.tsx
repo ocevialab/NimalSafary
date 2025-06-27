@@ -1,6 +1,7 @@
 import Hero from "./Components/Hero";
 import Nav from "./Components/Nav";
 import Popular from "./Components/Popular";
+import YouMustVisit from "./Components/YouMustVisit";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Nav />
       <Hero />
       <Popular />
+      <YouMustVisit />
     </>
   );
 }

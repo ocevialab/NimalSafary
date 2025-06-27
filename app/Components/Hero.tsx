@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <div
-      className="w-full md:h-screen h-full absolute top-0 text-secondary bg-center bg-cover "
+      className="w-full md:h-screen h-full text-secondary bg-center bg-cover "
       style={{
         backgroundImage: "url('/images/hero.webp')",
       }}
