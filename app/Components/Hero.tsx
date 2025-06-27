@@ -1,47 +1,106 @@
+// app/Components/Hero.tsx
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-function Hero() {
+export default function Hero() {
   return (
     <div
-      className="w-screen h-screen absolute top-0  text-secondary "
+      className="w-full md:h-screen h-full absolute top-0 text-secondary bg-center bg-cover "
       style={{
         backgroundImage: "url('/images/hero.webp')",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="flex justify-between items-end font-display absolute w-full bottom-0 md:px-12 h-full md:py-8">
-        <div className="w-2/5 h-fit  flex flex-col gap-2">
-          <h1 className="text-7xl font-display font-semibold tracking-wide leading-18">
+      <div className="absolute bottom-0 w-full md:px-12 px-6 md:py-8 py-4 flex md:flex-row flex-col md:justify-between md:items-end gap-4">
+        <div className="md:w-2/5 w-4/5 flex flex-col gap-4 text-white">
+          <motion.h1
+            className="lg:text-7xl md:text-5xl text-3xl font-display font-semibold tracking-wide"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, ease: "easeOut", delay: 0.2 },
+            }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
             Experience the <span className="text-accent">Wild</span> Like Never
             Before
-          </h1>
-          <p className="text-md pr-24">
-            Join <span className="text-accent"> Nimal Safari </span>for
+          </motion.h1>
+          <motion.p
+            className="md:text-md text-sm pr-24"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, ease: "easeOut", delay: 0.3 },
+            }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            Join <span className="text-accent">Nimal Safari</span> for
             unforgettable wildlife adventures in{" "}
-            <span className="text-accent">Yala, Udawalawe, Bundala,</span> and
-            more. Based in Tissamaharama , your gateway to Sri Lanka’s best
+            <span className="text-accent">Yala, Udawalawe, Bundala</span>, and
+            more. Based in Tissamaharama, your gateway to Sri Lanka’s best
             national parks.
-          </p>
-          <div className="px-8 p-2 bg-accent w-fit h-fit text-muted font-medium rounded-lg mt-4">
+          </motion.p>
+          <motion.div
+            className="px-8 py-2 bg-accent text-muted font-medium rounded-lg w-fit cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, ease: "easeOut", delay: 0.4 },
+            }}
+            viewport={{ once: true, amount: 0.1 }}
+          >
             Book Your Safari Now
-          </div>
+          </motion.div>
         </div>
-        <div className="w-fit h-fit p-2 bg-secondary/15 text-primary backdrop-opacity-10 backdrop-blur-2xl rounded-md flex flex-col gap-2">
-          <div className="text-secondary flex justify-between">
-            <Image
-              src="/images/traveladvisor.png"
-              width={24}
-              height={24}
-              alt="traveladvisorlog"
-            />
-            <h2></h2>
-          </div>
-        </div>
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut", delay: 0.2 },
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <Link
+            className="w-fit h-fit p-4 bg-secondary/15 text-primary backdrop-opacity-10 backdrop-blur-2xl rounded-md flex flex-col gap-2 hover:drop-shadow-cyan-500/50 drop-shadow-sm  font-display "
+            href={
+              "https://www.tripadvisor.com/Attraction_Review-g1102395-d5512904-Reviews-Nimal_Safari-Tissamaharama_Southern_Province.html"
+            }
+            target="black"
+          >
+            <div className="text-secondary flex justify-between gap-10 items-center">
+              <Image
+                src="/images/traveladvisor.png"
+                width={24}
+                height={24}
+                alt="traveladvisorlog"
+                className="w-6 h-6 opacity-80"
+              />
+              <h2 className="text-xl font-bold text-secondary ">Tripadvisor</h2>
+              <p className="text-xl font-bold text-accent">4.7</p>
+            </div>
+            <div className=" text-secondary text-sm mt-4">Sarah F</div>
+            <div className="text-sm  font-light w-[300px] text-secondary  ">
+              It was an amazing experience! We had a great driver and a lot of
+              luck - got to see teo leopards, elephants, water buffalos,
+              different deers and birds and a crocodile. The landscape is
+              beautiful as well. Would recommend a full day safari with a lovely
+              stop for lunch at the beach. Very well organised and memories for
+              a lifetime!
+            </div>
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
 }
-
-export default Hero;
