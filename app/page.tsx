@@ -3,6 +3,7 @@ import Gallery_Home from "./Components/Gallery_Home";
 import Hero from "./Components/Hero";
 import Nav from "./Components/Nav";
 import Popular from "./Components/Popular";
+import WhyChooseUs from "./Components/WhyChooseUs";
 import YouMustVisit from "./Components/YouMustVisit";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <YouMustVisit />
       <Gallery_Home />
       <About_Home />
+      <WhyChooseUs />
     </>
   );
 }

@@ -404,7 +404,7 @@ const About_Home = () => {
           {/* Second image with responsive positioning */}
           <div
             ref={image2Ref}
-            className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px] h-auto mx-auto lg:absolute md:top-48 lg:top-56 xl:top-60 md:right-0"
+            className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px] h-auto mx-auto md:absolute md:top-48 lg:top-56 xl:top-60 md:right-0"
           >
             <Image
               src="/images/about2.webp"
