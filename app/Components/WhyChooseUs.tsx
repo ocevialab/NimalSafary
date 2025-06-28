@@ -285,7 +285,7 @@ const WhyChooseUs: React.FC = () => {
               className="border-b border-gray-300"
             >
               <button
-                className="flex justify-between items-center w-full py-4 sm:py-6 text-lg sm:text-2xl font-medium text-left hover:text-accent transition-colors duration-200"
+                className="flex justify-between items-center w-full py-4 sm:py-6 text-lg sm:text-2xl  text-left hover:text-accent transition-colors duration-200"
                 onClick={() => toggleAccordion(index)}
                 type="button"
                 aria-expanded={openIndex === index}

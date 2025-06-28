@@ -245,7 +245,7 @@ const FAQ = () => {
               aria-expanded={openIndex === index}
               aria-controls={`faq-content-${index}`}
             >
-              <span className="text-base sm:text-lg md:text-xl font-medium pr-4 group-hover:text-accent transition-colors duration-200">
+              <span className=" text-lg sm:text-2xl pr-4 group-hover:text-accent transition-colors duration-200">
                 {faq.question}
               </span>
               <div className="flex-shrink-0">
