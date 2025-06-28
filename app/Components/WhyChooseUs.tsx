@@ -249,13 +249,13 @@ const WhyChooseUs: React.FC = () => {
         />
         <h2
           ref={titleRef}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase text-primary"
+          className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
         >
           WHY CHOOSE US
         </h2>
       </div>
 
-      <div className="mt-8 flex flex-col lg:flex-row gap-6 md:gap-8">
+      <div className="mt-8 flex flex-col lg:flex-row gap-6 md:gap-8 items-center">
         {/* Left Image Section */}
         <div className="w-full lg:w-1/2">
           {/* <img

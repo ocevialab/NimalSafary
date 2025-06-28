@@ -206,7 +206,7 @@ function Gallery_Home() {
         />
         <h2
           ref={titleRef}
-          className="text-base sm:text-xl md:text-2xl lg:text-3xl text-primary uppercase"
+          className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
         >
           Sri Lanka&apos;s Untamed Safari Wonders
         </h2>

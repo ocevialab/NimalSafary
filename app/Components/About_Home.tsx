@@ -380,14 +380,14 @@ const About_Home = () => {
         />
         <h2
           ref={titleRef}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase text-primary"
+          className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
         >
-          Popular among visitors
+          About Us
         </h2>
       </div>
       <div className="w-full flex lg:flex-row flex-col-reverse gap-2 md:gap-3 lg:gap-4 xl:gap-6">
         <div
-          className="lg:w-1/2 w-full h-fit flex flex-col gap-4 text-primary text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl text-justify mb-6 sm:mb-8 md:mb-8 leading-normal"
+          className="lg:w-1/2 w-full h-fit flex flex-col gap-4 text-primary text-base sm:text-md md:text-lg lg:text-xl xl:text-2xl  mb-6 sm:mb-8 md:mb-8 leading-normal"
           ref={descriptionRef}
         >
           <p>

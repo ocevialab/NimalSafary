@@ -330,7 +330,7 @@ function Popular(): React.JSX.Element {
         />
         <h2
           ref={titleRef}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase text-primary"
+          className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
         >
           Popular among visitors
         </h2>
@@ -339,7 +339,7 @@ function Popular(): React.JSX.Element {
       {/* Description */}
       <p
         ref={descriptionRef}
-        className="text-primary text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl w-full mb-6 sm:mb-8 md:mb-8 leading-normal"
+        className="text-primary text-base sm:text-md md:text-lg lg:text-xl xl:text-2xl w-full mb-6 sm:mb-8 md:mb-8 leading-normal"
       >
         A safari in Sri Lanka offers an unforgettable mix of thrilling wildlife
         encounters, breathtaking landscapes, and rich biodiversity. These are
