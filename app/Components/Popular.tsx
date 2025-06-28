@@ -307,7 +307,7 @@ function Popular(): React.JSX.Element {
         />
         <h2
           ref={titleRef}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl capitalize text-primary"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase text-primary"
         >
           Popular among visitors
         </h2>
