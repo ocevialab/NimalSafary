@@ -1,3 +1,4 @@
+import About_Home from "./Components/About_Home";
 import Gallery_Home from "./Components/Gallery_Home";
 import Hero from "./Components/Hero";
 import Nav from "./Components/Nav";
@@ -12,6 +13,7 @@ export default function Home() {
       <Popular />
       <YouMustVisit />
       <Gallery_Home />
+      <About_Home />
     </>
   );
 }
