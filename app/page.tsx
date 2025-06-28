@@ -1,4 +1,5 @@
 import About_Home from "./Components/About_Home";
+import FAQ from "./Components/Faq";
 import Gallery_Home from "./Components/Gallery_Home";
 import Hero from "./Components/Hero";
 import Nav from "./Components/Nav";
@@ -16,6 +17,8 @@ export default function Home() {
       <Gallery_Home />
       <About_Home />
       <WhyChooseUs />
+      <FAQ />
+      <div className="h-[200px] w-full bg-background"></div>
     </>
   );
 }
