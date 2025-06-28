@@ -24,6 +24,7 @@ function Popular(): React.JSX.Element {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const popularSafaris: SafariItem[] = [
     {
@@ -108,6 +109,28 @@ function Popular(): React.JSX.Element {
             trigger: descriptionRef.current,
             start: "top 80%",
             end: "bottom 60%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+      // Button animation
+      gsap.fromTo(
+        buttonRef.current,
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          delay: 0.8,
+          scrollTrigger: {
+            trigger: cardsContainerRef.current,
+            start: "top 70%",
             toggleActions: "play none none reverse",
           },
         }
@@ -354,6 +377,16 @@ function Popular(): React.JSX.Element {
             </Link>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center mt-4 sm:mt-4 md:mt-8">
+        <button
+          ref={buttonRef}
+          className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105  hover:shadow-xl text-sm sm:text-base md:text-lg
+          
+          "
+        >
+          Learn More
+        </button>
       </div>
     </div>
   );
