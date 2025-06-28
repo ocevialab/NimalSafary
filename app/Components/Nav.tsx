@@ -107,7 +107,7 @@ export default function Nav(): React.JSX.Element {
     <nav className="w-full flex items-center justify-between px-6 py-4 md:px-12 font-display text-secondary absolute z-50">
       {/* LOGO */}
       <Image
-        src="/images/logo.png"
+        src="/Images/logo.png"
         width={50}
         height={50}
         alt="Nimal Safari Logo"

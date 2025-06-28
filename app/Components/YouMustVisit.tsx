@@ -32,7 +32,7 @@ function YouMustVisit() {
   const youmust: parksItem[] = [
     {
       id: 1,
-      img: "/images/popular1.webp",
+      img: "/Images/popular1.webp",
       title: "Yala National Park Safari",
       link: "/popular/1/yala_national_park",
       pinColor: "text-[#0288D1]",
@@ -40,7 +40,7 @@ function YouMustVisit() {
     },
     {
       id: 2,
-      img: "/images/popular2.webp",
+      img: "/Images/popular2.webp",
       title: "Udawala National Park Safari",
       link: "/popular/2/udawala_national_park",
       pinColor: "text-[#FFEA00]",
@@ -48,7 +48,7 @@ function YouMustVisit() {
     },
     {
       id: 3,
-      img: "/images/popular3.webp",
+      img: "/Images/popular3.webp",
       title: "Bundala Nation Park Safari",
       link: "/popular/3/bundala_national_park",
       pinColor: "text-[#0F9D58]",
@@ -56,7 +56,7 @@ function YouMustVisit() {
     },
     {
       id: 4,
-      img: "/images/lunuganSmall.webp",
+      img: "/Images/lunuganSmall.webp",
       title: "Lunugamwehera Nation Park Safari",
       link: "/popular/3/lunugamwehera_national_park",
       pinColor: "text-[#FF5252]",

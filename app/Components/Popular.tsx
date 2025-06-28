@@ -29,19 +29,19 @@ function Popular(): React.JSX.Element {
   const popularSafaris: SafariItem[] = [
     {
       id: 1,
-      img: "/images/popular1.webp",
+      img: "/Images/popular1.webp",
       title: "Yala National Park Safari",
       link: "/popular/1/yala_national_park",
     },
     {
       id: 2,
-      img: "/images/popular2.webp",
+      img: "/Images/popular2.webp",
       title: "Udawala National Park Safari",
       link: "/popular/2/udawala_national_park",
     },
     {
       id: 3,
-      img: "/images/popular3.webp",
+      img: "/Images/popular3.webp",
       title: "Bundala Nation Park Safari",
       link: "/popular/3/bundala_national_park",
     },

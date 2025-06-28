@@ -426,7 +426,7 @@ const About_Home = () => {
             className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px] h-auto mb-4 md:mb-2 mx-auto lg:absolute md:-top-20 md:right-0 lg:-top-16 xl:-top-20"
           >
             <Image
-              src="/images/about1.webp"
+              src="/Images/about1.webp"
               alt="About 1"
               width={500}
               height={400}
@@ -441,7 +441,7 @@ const About_Home = () => {
             className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px] h-auto mx-auto md:absolute md:top-48 lg:top-56 xl:top-60 md:right-0"
           >
             <Image
-              src="/images/about2.webp"
+              src="/Images/about2.webp"
               alt="About 2"
               width={500}
               height={400}

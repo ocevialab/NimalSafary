@@ -11,7 +11,7 @@ export default function Hero() {
     <div
       className="w-full h-screen  text-secondary bg-center bg-cover "
       style={{
-        backgroundImage: "url('/images/hero.webp')",
+        backgroundImage: "url('/Images/hero.webp')",
       }}
     >
       <div className="absolute bottom-0 w-full md:px-12 px-6 md:py-8 py-4 flex md:flex-row flex-col md:justify-between md:items-end gap-4">
@@ -80,7 +80,7 @@ export default function Hero() {
           >
             <div className="text-secondary flex justify-between gap-10 items-center">
               <Image
-                src="/images/traveladvisor.png"
+                src="/Images/traveladvisor.png"
                 width={24}
                 height={24}
                 alt="traveladvisorlog"

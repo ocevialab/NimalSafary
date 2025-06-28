@@ -17,15 +17,15 @@ function Gallery_Home() {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const images = [
-    "/images/gallery1.webp",
-    "/images/gallery7.webp",
-    "/images/gallery4.webp",
-    "/images/gallery3.webp",
-    "/images/gallery5.webp",
-    "/images/gallery6.webp",
-    "/images/gallery2.webp",
-    "/images/gallery8.webp",
-    "/images/gallery9.webp",
+    "/Images/gallery1.webp",
+    "/Images/gallery7.webp",
+    "/Images/gallery4.webp",
+    "/Images/gallery3.webp",
+    "/Images/gallery5.webp",
+    "/Images/gallery6.webp",
+    "/Images/gallery2.webp",
+    "/Images/gallery8.webp",
+    "/Images/gallery9.webp",
   ];
 
   useEffect(() => {

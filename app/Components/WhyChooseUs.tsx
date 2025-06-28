@@ -266,7 +266,7 @@ const WhyChooseUs: React.FC = () => {
           /> */}
           <Image
             ref={imageRef}
-            src="/images/choose.webp"
+            src="/Images/choose.webp"
             alt="Counseling Session"
             className="rounded-xl w-full h-116 aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/3] object-cover shadow-lg"
             width={400}
