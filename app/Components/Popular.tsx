@@ -348,8 +348,6 @@ function Popular(): React.JSX.Element {
                 />
               </div>
 
-              <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
               <h3 className="card-title text-white text-xs sm:text-sm lg:text-lg xl:text-xl m-2 sm:m-3 md:m-4 absolute left-0 bottom-0 z-10 leading-tight drop-shadow-lg">
                 {item.title}
               </h3>

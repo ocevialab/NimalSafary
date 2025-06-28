@@ -449,7 +449,6 @@ function YouMustVisit() {
                   </div>
 
                   {/* Overlay */}
-                  <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-xl sm:rounded-2xl" />
 
                   {/* Title */}
                   <h3 className="card-title text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl p-2 sm:p-3 md:p-4 absolute left-0 bottom-0 z-20 leading-tight drop-shadow-lg font-medium">
