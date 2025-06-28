@@ -389,11 +389,11 @@ function YouMustVisit() {
       </header>
 
       {/* Main Content */}
-      <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 xl:gap-8 w-full">
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 xl:gap-8 w-full lg:h-[600px] xl:h-[700px]">
         {/* Map Section */}
         <div
           ref={mapRef}
-          className="w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px]"
+          className="w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-full"
         >
           <iframe
             src="https://www.google.com/maps/d/u/0/embed?mid=1I53M-mqfiOy0Xr4HmEqh_t4cEu94C5w&ehbc=2E312F&noprof=1&hl=en"
@@ -412,7 +412,7 @@ function YouMustVisit() {
         {/* Cards Section */}
         <div
           ref={cardsContainerRef}
-          className="w-full lg:w-1/2 grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-5 auto-rows-fr"
+          className="w-full lg:w-1/2 min-h-[320px] sm:min-h-[420px] md:min-h-[520px] lg:h-full grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-4 xl:gap-5"
         >
           {youmust.map((item, index) => (
             <div
@@ -420,10 +420,10 @@ function YouMustVisit() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className="group cursor-pointer"
+              className="group cursor-pointer h-full"
             >
               <Link href={item.link} className="block w-full h-full">
-                <div className="bg-black/10 rounded-xl sm:rounded-2xl w-full aspect-square relative overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <div className="bg-black/10 rounded-xl sm:rounded-2xl w-full h-full min-h-[150px] sm:min-h-[200px] md:min-h-[250px] relative overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
                   {/* Location Pin */}
                   <IoLocationSharp
                     className={`card-pin absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 ${item.pinColor} z-20 text-xl sm:text-2xl md:text-3xl lg:text-4xl drop-shadow-lg`}
