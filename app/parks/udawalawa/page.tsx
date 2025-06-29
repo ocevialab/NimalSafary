@@ -374,7 +374,7 @@ const Page = () => {
           </div>
         </div>
       </section>
-      <Gallery title="Yala" images={images} />
+      <Gallery title="Udawalawa" images={images} />
       <Features />
     </>
   );
