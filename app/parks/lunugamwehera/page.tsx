@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
+
 import Gallery from "@/app/Components/Gallery";
 import Features from "../Features";
 import Nav from "@/app/Components/Nav";
