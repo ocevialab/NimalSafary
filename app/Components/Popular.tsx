@@ -43,7 +43,7 @@ function Popular(): React.JSX.Element {
       id: 3,
       img: "/Images/popular3.webp",
       title: "Bundala Nation Park Safari",
-      link: "/parks/3",
+      link: "/parks/bundala",
     },
   ];
 
