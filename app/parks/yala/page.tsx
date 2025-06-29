@@ -12,15 +12,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Page = () => {
   const images = [
-    "/Images/gallery1.webp",
-    "/Images/gallery7.webp",
-    "/Images/gallery4.webp",
-    "/Images/gallery3.webp",
-    "/Images/gallery5.webp",
-    "/Images/gallery6.webp",
-    "/Images/gallery2.webp",
-    "/Images/gallery8.webp",
-    "/Images/gallery9.webp",
+    "/Images/yala1.webp",
+    "/Images/yala7.webp",
+    "/Images/yala4.webp",
+    "/Images/yala3.webp",
+    "/Images/yala5.webp",
+    "/Images/yala6.webp",
+    "/Images/yala2.webp",
+    "/Images/yala8.webp",
+    "/Images/yala9.webp",
   ];
 
   // Hero section refs
