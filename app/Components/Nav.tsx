@@ -9,6 +9,10 @@ interface NavItem {
   label: string;
 }
 
+interface NavProps {
+  textcolor: string;
+}
+
 const navItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/safaris", label: "Safaris" },
@@ -16,7 +20,7 @@ const navItems: NavItem[] = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Nav(): React.JSX.Element {
+export default function Nav({ textcolor }: NavProps): React.JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
   const navItemsRef = useRef<HTMLLIElement[]>([]);
@@ -104,7 +108,11 @@ export default function Nav(): React.JSX.Element {
   };
 
   return (
-    <nav className="w-full flex items-center justify-between px-6 py-4 md:px-12 font-display text-secondary absolute z-50">
+    <nav
+      className={`w-full flex items-center justify-between px-6 py-4 md:px-12 font-display ${
+        textcolor ? textcolor : "text-secondary"
+      } absolute z-50`}
+    >
       {/* LOGO */}
       <Image
         src="/Images/logo.png"
@@ -138,7 +146,7 @@ export default function Nav(): React.JSX.Element {
           <svg
             className="w-6 h-6 transition-transform duration-300"
             fill="none"
-            stroke="white"
+            stroke={textcolor === "text-secondary" ? "white" : "black"}
             viewBox="0 0 24 24"
           >
             <path
@@ -178,7 +186,7 @@ export default function Nav(): React.JSX.Element {
       {/* MOBILE LINKS */}
       <ul
         ref={menuRef}
-        className={`flex flex-col md:hidden fixed top-0 left-0 w-full h-screen bg-gradient-to-b from-black via-black/95 to-black/90 pt-24 px-6 z-15 ${
+        className={`flex flex-col md:hidden fixed top-0 left-0 w-full h-screen bg-gradient-to-b from-black via-black/95 to-black/90 pt-24 px-6 z-15 text-secondary ${
           open ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >

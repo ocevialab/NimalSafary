@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Gallery from "@/app/Components/Gallery";
 import Features from "../Features";
+import Nav from "../../Components/Nav";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -251,6 +252,8 @@ const Page = () => {
 
   return (
     <>
+      {" "}
+      <Nav textcolor="text-black" />
       {/* Hero Section */}
       <div
         ref={containerRef}
@@ -274,7 +277,6 @@ const Page = () => {
           </div>
         </div>
       </div>
-
       {/* Why Choose Us Section */}
       <section
         ref={containerRef2}
@@ -370,7 +372,6 @@ const Page = () => {
           </div>
         </div>
       </section>
-
       <Gallery title="Yala" images={images} />
       <Features />
     </>
