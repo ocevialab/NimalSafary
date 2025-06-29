@@ -295,7 +295,7 @@ const Page = () => {
             ref={titleRef1}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            WHY CHOOSE US
+            Welcome to Yala
           </h2>
         </div>
 

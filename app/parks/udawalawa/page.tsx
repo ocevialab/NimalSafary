@@ -13,15 +13,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Page = () => {
   const images = [
-    "/Images/yala1.webp",
-    "/Images/yala7.webp",
-    "/Images/yala4.webp",
-    "/Images/yala3.webp",
-    "/Images/yala5.webp",
-    "/Images/yala6.webp",
-    "/Images/yala2.webp",
-    "/Images/yala8.webp",
-    "/Images/yala9.webp",
+    "/Images/uda1.webp",
+    "/Images/uda7.webp",
+    "/Images/uda4.webp",
+    "/Images/uda3.webp",
+    "/Images/uda5.webp",
+    "/Images/uda6.webp",
+    "/Images/uda2.webp",
+    "/Images/uda8.webp",
+    "/Images/uda9.webp",
   ];
 
   // Hero section refs
@@ -267,7 +267,7 @@ const Page = () => {
             ref={titleRef}
             className="font-bold xl:text-7xl lg:text-6xl md:text-5xl sm:text-4xl text-3xl mb-6"
           >
-            Yala National Park
+            Udawalawa National Park
           </h1>
           <div
             ref={buttonRef}
@@ -295,7 +295,7 @@ const Page = () => {
             ref={titleRef1}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            WHY CHOOSE US
+            Welcome to Udawalawa
           </h2>
         </div>
 
@@ -305,17 +305,18 @@ const Page = () => {
             ref={descriptionRef1}
           >
             <p>
-              Located in the southeastern corner of Sri Lanka, Yala National
-              Park is the country&apos;s most visited and iconic wildlife
-              reserve. Spanning over 1,200 square kilometers of diverse
-              landscapes — from dry woodlands and grasslands to coastal lagoons
-              — Yala is best known for offering one of the highest leopard
-              densities in the world.
+              Nestled in the southern plains of Sri Lanka, Udawalawe National
+              Park is a premier destination for unforgettable wildlife
+              encounters. Covering over 300 square kilometers of open
+              grasslands, forest patches, and the scenic Udawalawe Reservoir,
+              the park is renowned for its large elephant population and
+              consistent sightings of wildlife in their natural habitat.
             </p>
             <p>
-              Whether you&apos;re a wildlife photographer, a nature lover, or a
-              first-time safari-goer, Yala promises an unforgettable journey
-              into the heart of Sri Lanka&apos;s untamed wilderness.
+              Whether you&#39;re a wildlife photographer, a family adventurer,
+              or a nature enthusiast, Udawalawe offers an authentic and
+              accessible safari experience — often considered the best place in
+              Asia to see wild elephants up close.
             </p>
           </div>
         </div>
@@ -343,29 +344,30 @@ const Page = () => {
             ref={descriptionRef2}
           >
             <p className="items-center">
-              Yala National Park is globally elite for{" "}
+              Udawalawe is internationally recognized for its{" "}
               <span className="text-accent font-bold">
-                high leopard density and wildlife encounters
+                predictable elephant sightings,
               </span>{" "}
-              with only rare urban sites briefly matching its numbers.{" "}
+              ften in herds, making it one of the top destinations for elephant
+              lovers. With its{" "}
+              <span className="text-accent font-bold">
+                diverse ecosystems, birdwatching opportunities, and year-round
+                accessibility,
+              </span>{" "}
+              it competes with the best wildlife reserves globally — a true gem
+              for those seeking serene, uncrowded, and soul-stirring safari
+              experiences. <br />
+              “Udawalawe rivals Africa’s famous reserves for elephant
+              encounters”
               <span>
                 <Link
                   className="bg-[#D9FFE2] border border-black text-xs rounded-full font-light italic py-2 px-4"
                   href={
-                    "https://www.hindustantimes.com/cities/mumbai-news/new-study-sgnp-has-highest-documented-density-of-leopards-in-world-101646926548143.html"
+                    "https://www.lonelyplanet.com/sri-lanka/the-hill-country/udawalawe-national-park/attractions/uda-walawe-national-park/a/poi-sig/1195453/357481"
                   }
                   target="blank"
                 >
-                  *hinustantimes
-                </Link>
-                <Link
-                  className="bg-[#D9FFE2] border border-black text-xs rounded-full font-light italic py-2 px-4"
-                  href={
-                    "https://www.inspiringvacations.com/us/sri-lanka-tours/insight-articles/going-on-a-yala-national-park-safari-heres-what-to-expect/13733"
-                  }
-                  target="blank"
-                >
-                  *inspiringvacations
+                  *lonelyplanet.com
                 </Link>
               </span>
             </p>
