@@ -31,19 +31,19 @@ function Popular(): React.JSX.Element {
       id: 1,
       img: "/Images/popular1.webp",
       title: "Yala National Park Safari",
-      link: "/popular/1/yala_national_park",
+      link: "/parks/1",
     },
     {
       id: 2,
       img: "/Images/popular2.webp",
       title: "Udawala National Park Safari",
-      link: "/popular/2/udawala_national_park",
+      link: "/parks/2",
     },
     {
       id: 3,
       img: "/Images/popular3.webp",
       title: "Bundala Nation Park Safari",
-      link: "/popular/3/bundala_national_park",
+      link: "/parks/3",
     },
   ];
 
