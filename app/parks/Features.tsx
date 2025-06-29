@@ -382,7 +382,7 @@ const Features: React.FC = () => {
             Tripadvisor Rating
           </div>
           <div className="md:text-5xl text-2xl flex gap-1 font-bold">
-            <div className="stat-number">4.2</div>
+            <div className="stat-number">4.7</div>
           </div>
         </div>
         <div className="stat-item flex flex-col items-center gap-2">
