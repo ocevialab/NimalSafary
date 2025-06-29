@@ -6,22 +6,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Gallery from "@/app/Components/Gallery";
 import Features from "../Features";
-import Nav from "../../Components/Nav";
+import Nav from "@/app/Components/Nav";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const Page = () => {
   const images = [
-    "/Images/uda1.webp",
-    "/Images/uda7.webp",
-    "/Images/uda4.webp",
-    "/Images/uda3.webp",
-    "/Images/uda5.webp",
-    "/Images/uda6.webp",
-    "/Images/uda2.webp",
-    "/Images/uda8.webp",
-    "/Images/uda9.webp",
+    "/Images/lunu1.webp",
+    "/Images/lunu7.webp",
+    "/Images/lunu4.webp",
+    "/Images/lunu3.webp",
+    "/Images/lunu5.webp",
+    "/Images/lunu6.webp",
+    "/Images/lunu2.webp",
+    "/Images/lunu8.webp",
+    "/Images/lunu9.webp",
   ];
 
   // Hero section refs
@@ -252,14 +252,13 @@ const Page = () => {
 
   return (
     <>
-      {" "}
-      <Nav textcolor="text-black" />
+      <Nav textcolor="text-secondary" />
       {/* Hero Section */}
       <div
         ref={containerRef}
         className="w-full h-screen font-display text-secondary bg-center bg-cover"
         style={{
-          backgroundImage: "url('/Images/udabig.webp')",
+          backgroundImage: "url('/Images/lunubig.webp')",
         }}
       >
         <div className="justify-end h-full w-full xl:py-24 md:px-12 px-6 lg:py-12 md:py-16 py-20 flex flex-col">
@@ -267,7 +266,7 @@ const Page = () => {
             ref={titleRef}
             className="font-bold xl:text-7xl lg:text-6xl md:text-5xl sm:text-4xl text-3xl mb-6"
           >
-            Udawalawa National Park
+            Lunugamwehera National Park
           </h1>
           <div
             ref={buttonRef}
@@ -277,6 +276,7 @@ const Page = () => {
           </div>
         </div>
       </div>
+
       {/* Why Choose Us Section */}
       <section
         ref={containerRef2}
@@ -295,7 +295,7 @@ const Page = () => {
             ref={titleRef1}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            Welcome to Udawalawa
+            Welcome to Lunugamwehera
           </h2>
         </div>
 
@@ -305,18 +305,21 @@ const Page = () => {
             ref={descriptionRef1}
           >
             <p>
-              Nestled in the southern plains of Sri Lanka, Udawalawe National
-              Park is a premier destination for unforgettable wildlife
-              encounters. Covering over 300 square kilometers of open
-              grasslands, forest patches, and the scenic Udawalawe Reservoir,
-              the park is renowned for its large elephant population and
-              consistent sightings of wildlife in their natural habitat.
+              Nestled between Yala and Udawalawe National Parks, Lunugamvehera
+              National Park is a hidden treasure of southern Sri Lanka, offering
+              a quieter, more immersive safari experience. Covering over 230
+              square kilometers, the park plays a vital role as a wildlife
+              corridor — allowing elephants and other animals to move freely
+              between major protected areas.
             </p>
             <p>
-              Whether you&#39;re a wildlife photographer, a family adventurer,
-              or a nature enthusiast, Udawalawe offers an authentic and
-              accessible safari experience — often considered the best place in
-              Asia to see wild elephants up close.
+              The park is known for its dense forest cover, grasslands, and
+              water reservoirs, which provide shelter and sustenance for a
+              diverse range of species. Lunugamvehera is home to elephants,
+              spotted deer, sambars, wild boars, crocodiles, peacocks,
+              junglefowl, and a rich variety of birds and butterflies. With
+              fewer crowds, it&apos;s the perfect place for nature lovers and
+              photographers to connect with the wild in peace.
             </p>
           </div>
         </div>
@@ -334,7 +337,7 @@ const Page = () => {
             ref={titleRef2}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            Why Udawalawa Stands Apart on the Global Safari Map
+            Why Lunugamehera Stands Apart on the Global Safari Map
           </h2>
         </div>
 
@@ -344,37 +347,27 @@ const Page = () => {
             ref={descriptionRef2}
           >
             <p className="items-center">
-              Udawalawe is internationally recognized for its{" "}
+              Lunugamvehera may not be as famous as Yala or Udawalawe, but
+              it&apos;s a{" "}
               <span className="text-accent font-bold">
-                predictable elephant sightings,
+                critical conservation zone
               </span>{" "}
-              ften in herds, making it one of the top destinations for elephant
-              lovers. With its{" "}
+              and an essential part of Sri Lanka&apos;s{" "}
               <span className="text-accent font-bold">
-                diverse ecosystems, birdwatching opportunities, and year-round
-                accessibility,
+                protected ecosystem network.
               </span>{" "}
-              it competes with the best wildlife reserves globally — a true gem
-              for those seeking serene, uncrowded, and soul-stirring safari
-              experiences. <br />
-              “Udawalawe rivals Africa’s famous reserves for elephant
-              encounters”
-              <span>
-                <Link
-                  className="bg-[#D9FFE2] border border-black text-xs rounded-full font-light italic py-2 px-4"
-                  href={
-                    "https://www.lonelyplanet.com/sri-lanka/the-hill-country/udawalawe-national-park/attractions/uda-walawe-national-park/a/poi-sig/1195453/357481"
-                  }
-                  target="blank"
-                >
-                  *lonelyplanet.com
-                </Link>
+              Its tranquility and biodiversity make it a top pick for travelers
+              seeking off-the-beaten-path wildlife adventures — especially for
+              those who value{" "}
+              <span className="text-accent font-bold">
+                undisturbed wilderness and authentic nature encounters.
               </span>
             </p>
           </div>
         </div>
       </section>
-      <Gallery title="Udawalawa" images={images} />
+
+      <Gallery title="Yala" images={images} />
       <Features />
     </>
   );

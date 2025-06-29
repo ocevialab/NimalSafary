@@ -295,7 +295,7 @@ const Page = () => {
             ref={titleRef1}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            Welcome to Yala
+            Welcome to Bundala
           </h2>
         </div>
 
@@ -305,17 +305,17 @@ const Page = () => {
             ref={descriptionRef1}
           >
             <p>
-              Located in the southeastern corner of Sri Lanka, Yala National
-              Park is the country&apos;s most visited and iconic wildlife
-              reserve. Spanning over 1,200 square kilometers of diverse
-              landscapes — from dry woodlands and grasslands to coastal lagoons
-              — Yala is best known for offering one of the highest leopard
-              densities in the world.
+              Situated along the southern coast of Sri Lanka, Bundala National
+              Park is a UNESCO-designated biosphere reserve and a haven for bird
+              enthusiasts and eco-travelers. Spanning over 220 square
+              kilometers, the park&apos;s mosaic of wetlands, salt pans,
+              lagoons, and scrub jungles creates a unique ecosystem that
+              attracts a breathtaking variety of wildlife.
             </p>
             <p>
               Most famous for being a critical stopover for migratory birds,
               Bundala is home to over 200 bird species, including the vibrant
-              greater flamingo, painted storks, and bee-eaters. It’s also a
+              greater flamingo, painted storks, and bee-eaters. It&apos;s also a
               tranquil refuge for elephants, crocodiles, monitor lizards, and
               even elusive leopards.
             </p>
@@ -340,7 +340,7 @@ const Page = () => {
             ref={titleRef2}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            Why Yala Stands Apart on the Global Safari Map
+            Why Bundala Stands Apart on the Global Safari Map
           </h2>
         </div>
 
