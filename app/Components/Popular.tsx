@@ -36,8 +36,8 @@ function Popular(): React.JSX.Element {
     {
       id: 2,
       img: "/Images/popular2.webp",
-      title: "Udawala National Park Safari",
-      link: "/parks/2",
+      title: "Udawalawa National Park Safari",
+      link: "/parks/udawalawa",
     },
     {
       id: 3,
