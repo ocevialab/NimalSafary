@@ -16,7 +16,7 @@ interface NavProps {
 const navItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/safaris", label: "Safaris" },
-  { href: "/about", label: "About Us" },
+  { href: "/aboutus", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -195,7 +195,7 @@ export default function Nav({ textcolor }: NavProps): React.JSX.Element {
             key={href}
             ref={addToRefs}
             className="relative cursor-pointer font-body font-medium text-2xl py-4 border-b border-secondary/20 last:border-b-0
-              hover:text-primary transition-colors duration-300"
+              hover:text-accent transition-colors duration-300"
           >
             <Link
               href={href}
