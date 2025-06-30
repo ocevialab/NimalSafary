@@ -409,7 +409,7 @@ const Page = () => {
             </div>
             <Image
               className="self-center-safe xl:w-xs lg:w-2xs w-3xs "
-              src="/Images/logobig.webp"
+              src="/Images/logoBig.webp"
               alt="logo"
               width={200}
               height={200}
