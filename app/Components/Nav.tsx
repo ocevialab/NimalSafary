@@ -173,10 +173,14 @@ export default function Nav({ textcolor }: NavProps): React.JSX.Element {
         {navItems.map(({ href, label }) => (
           <li
             key={href}
-            className="relative cursor-pointer font-body font-medium md:text-lg
+            className={`relative cursor-pointer font-body font-medium md:text-lg
               after:absolute after:bottom-1 after:left-0
-              after:h-[2px] after:w-0 after:bg-primary
-              after:transition-all after:duration-300 hover:after:w-full"
+              after:h-[2px] after:w-0  ${
+                textcolor === "text-black"
+                  ? "after:bg-black"
+                  : "after:bg-secondary"
+              }
+              after:transition-all after:duration-300 hover:after:w-full`}
           >
             <Link href={href}>{label}</Link>
           </li>
