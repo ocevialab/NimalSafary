@@ -50,13 +50,13 @@ const Footer = () => {
           <Link href={"/"} className="cursor-pointer hover:text-accent">
             Home
           </Link>
-          <Link href={"/"} className="cursor-pointer hover:text-accent">
+          <Link href={"/safaris"} className="cursor-pointer hover:text-accent">
             Safaris
           </Link>
-          <Link href={"/"} className="cursor-pointer hover:text-accent">
+          <Link href={"/aboutus"} className="cursor-pointer hover:text-accent">
             About Us
           </Link>
-          <Link href={"/"} className="cursor-pointer hover:text-accent">
+          <Link href={"/contact"} className="cursor-pointer hover:text-accent">
             Contact
           </Link>
         </div>
