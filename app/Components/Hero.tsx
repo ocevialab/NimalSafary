@@ -13,7 +13,7 @@ export default function Hero() {
     "/Images/aboutbig.webp",
     "/Images/bubig.webp",
     "/Images/udabig.webp",
-    "/Images/hero.webp",
+    "/Images/lunubig.webp",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
