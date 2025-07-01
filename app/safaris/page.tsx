@@ -287,6 +287,18 @@ const Page = () => {
     };
   }, []);
 
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
+  const openWhatsAppChat = (packageName: string) => {
+    const message = encodeURIComponent(
+      `Hello! I'm interested in booking the "${packageName}" package. ` +
+        ` Could you please provide more information or confirm availability?`
+    );
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <>
       <Nav textcolor="text-secondary" />
@@ -368,11 +380,11 @@ const Page = () => {
                   {item.description}
                 </p>
 
-                <Link href={item.link}>
+                <div onClick={() => openWhatsAppChat(item.title)}>
                   <button className="book-button bg-accent w-full text-muted font-semibold py-3 px-6 rounded-xl  cursor-pointer">
                     Book Now
                   </button>
-                </Link>
+                </div>
               </div>
             </div>
           ))}

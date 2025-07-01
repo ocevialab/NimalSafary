@@ -378,16 +378,19 @@ function Popular(): React.JSX.Element {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-4 sm:mt-4 md:mt-8">
+      <Link
+        href="/safaris"
+        className="flex justify-center mt-4 sm:mt-4 md:mt-8"
+      >
         <button
           ref={buttonRef}
-          className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105  hover:shadow-xl text-sm sm:text-base md:text-lg
+          className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105  hover:shadow-xl text-sm sm:text-base md:text-lg cursor-poineter
           
           "
         >
-          Learn More
+          View More
         </button>
-      </div>
+      </Link>
     </div>
   );
 }
