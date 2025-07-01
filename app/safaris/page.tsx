@@ -347,7 +347,7 @@ const Page = () => {
             ref={headerTitleRef}
             className="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase text-primary"
           >
-            Popular among visitors
+            Safaris
           </h2>
         </div>
 
