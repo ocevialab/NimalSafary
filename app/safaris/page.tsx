@@ -290,11 +290,20 @@ const Page = () => {
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
   const openWhatsAppChat = (packageName: string) => {
+    // Basic validation for phone number
+    if (!phoneNumber) {
+      console.error(
+        "WhatsApp phone number is not configured. Please set NEXT_PUBLIC_WHATSAPP_NUMBER environment variable in a real Next.js app."
+      );
+      return;
+    }
+
     const message = encodeURIComponent(
       `Hello! I'm interested in booking the "${packageName}" package. ` +
-        ` Could you please provide more information or confirm availability?`
+        `Could you please provide more information or confirm availability?`
     );
 
+    // Construct the WhatsApp URL with the '+' in the phone number
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappUrl, "_blank");
   };
