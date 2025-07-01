@@ -317,6 +317,11 @@ const WhyChooseUs: React.FC = () => {
           ))}
         </div>
       </div>
+      <p className="mt-4">
+        We offer free pickup and drop-off from hotels and guesthouses in: -
+        Tissamaharama - Kataragama - Kirinda - Yala (Other areas available on
+        request)
+      </p>
     </section>
   );
 };
