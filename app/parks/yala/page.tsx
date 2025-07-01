@@ -250,6 +250,27 @@ const Page = () => {
     };
   }, []);
 
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
+  const openWhatsAppChat = (packageName: string) => {
+    // Basic validation for phone number
+    if (!phoneNumber) {
+      console.error(
+        "WhatsApp phone number is not configured. Please set NEXT_PUBLIC_WHATSAPP_NUMBER environment variable in a real Next.js app."
+      );
+      return;
+    }
+
+    const message = encodeURIComponent(
+      `Hello! I'm interested in booking the a safari for "${packageName}" ` +
+        `Could you please provide more information or confirm availability?`
+    );
+
+    // Construct the WhatsApp URL with the '+' in the phone number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <>
       <Nav textcolor="text-secondary" />
@@ -271,6 +292,7 @@ const Page = () => {
           <div
             ref={buttonRef}
             className="md:px-8 px-4 md:py-2 py-1 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-sm cursor-pointer transition-all duration-300"
+            onClick={() => openWhatsAppChat("Yala National Park")}
           >
             Book Your Safari Now
           </div>
@@ -374,7 +396,7 @@ const Page = () => {
       </section>
 
       <Gallery title="Yala" images={images} />
-      <Features />
+      <Features packageName="Yala National Park" />
     </>
   );
 };

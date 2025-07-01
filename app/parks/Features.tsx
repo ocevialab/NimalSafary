@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,7 +17,11 @@ interface FeatureItem {
   feature: string;
 }
 
-const Features: React.FC = () => {
+interface FeatureProp {
+  packageName: string;
+}
+
+const Features: React.FC<FeatureProp> = ({ packageName }) => {
   // Refs for animation targets
   const containerRef2 = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -26,7 +31,7 @@ const Features: React.FC = () => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const featuresGridRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
-  const secondButtonRef = useRef<HTMLDivElement>(null);
+  const secondButtonRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const container = containerRef2.current;
@@ -270,6 +275,27 @@ const Features: React.FC = () => {
     };
   }, []);
 
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
+  const openWhatsAppChat = () => {
+    // Basic validation for phone number
+    if (!phoneNumber) {
+      console.error(
+        "WhatsApp phone number is not configured. Please set NEXT_PUBLIC_WHATSAPP_NUMBER environment variable in a real Next.js app."
+      );
+      return;
+    }
+
+    const message = encodeURIComponent(
+      `Hello! I'm interested in booking the "${packageName}" package. ` +
+        `Could you please provide more information or confirm availability?`
+    );
+
+    // Construct the WhatsApp URL with the '+' in the phone number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   // Features data with proper typing
   const features: FeatureItem[] = [
     {
@@ -405,6 +431,7 @@ const Features: React.FC = () => {
         <div
           ref={buttonRef}
           className="animated-button md:px-14 px-10 md:py-4 py-4 bg-accent text-muted font-medium rounded-xl w-fit md:text-2xl text-sm cursor-pointer transition-all duration-300"
+          onClick={() => openWhatsAppChat()}
         >
           Book Your Safari Now
         </div>
@@ -412,12 +439,13 @@ const Features: React.FC = () => {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center mt-10">
-        <div
+        <Link
+          href="/aboutus"
           ref={secondButtonRef}
           className="animated-button md:px-8 px-4 md:py-2 py-1 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-sm cursor-pointer transition-all duration-300"
         >
           Learn more about us
-        </div>
+        </Link>
       </div>
     </section>
   );
