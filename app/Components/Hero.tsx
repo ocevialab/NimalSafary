@@ -7,6 +7,26 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
+  const openWhatsAppChat = () => {
+    // Basic validation for phone number
+    if (!phoneNumber) {
+      console.error(
+        "WhatsApp phone number is not configured. Please set NEXT_PUBLIC_WHATSAPP_NUMBER environment variable in a real Next.js app."
+      );
+      return;
+    }
+
+    const message = encodeURIComponent(
+      `Hello! I’m interested in booking a safari with Namal Safari. Could you please share more details about the available packages and timings? Thank you!`
+    );
+
+    // Construct the WhatsApp URL with the '+' in the phone number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <div
       className="w-full h-screen  text-secondary bg-center bg-cover "
@@ -56,6 +76,7 @@ export default function Hero() {
               transition: { duration: 0.6, ease: "easeOut", delay: 0.4 },
             }}
             viewport={{ once: true, amount: 0.1 }}
+            onClick={() => openWhatsAppChat()}
           >
             Book Your Safari Now
           </motion.div>
