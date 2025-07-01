@@ -360,7 +360,10 @@ function Popular(): React.JSX.Element {
             }}
             className="w-full aspect-[4/5] sm:aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5] xl:aspect-[4/5] rounded-lg sm:rounded-xl relative block overflow-hidden group shadow-lg hover:shadow-2xl transition-shadow duration-300"
           >
-            <Link href={item.link} className="block w-full h-full">
+            <Link
+              href={item.link}
+              className="block w-full h-full cursor-pointer"
+            >
               <div className="w-full h-full relative card-image">
                 <Image
                   src={item.img}
@@ -380,7 +383,7 @@ function Popular(): React.JSX.Element {
       </div>
       <Link
         href="/safaris"
-        className="flex justify-center mt-4 sm:mt-4 md:mt-8"
+        className="flex justify-center mt-4 sm:mt-4 md:mt-8 cursor-pointer"
       >
         <button
           ref={buttonRef}
