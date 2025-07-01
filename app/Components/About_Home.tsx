@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -408,7 +409,10 @@ const About_Home = () => {
             sense of wonder and respect for nature that first inspired us—rooted
             in tradition, yet refined for today&apos;s travelers.
           </p>
-          <div className="flex justify-center mt-4 sm:mt-4 md:mt-8">
+          <Link
+            className="flex justify-center mt-4 sm:mt-4 md:mt-8"
+            href="/aboutus"
+          >
             <button
               ref={buttonRef}
               className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105  hover:shadow-xl text-sm sm:text-base md:text-lg
@@ -417,7 +421,7 @@ const About_Home = () => {
             >
               Learn More
             </button>
-          </div>
+          </Link>
         </div>
         <div className="lg:w-1/2 w-full h-fit relative" ref={imageContainerRef}>
           {/* First image with responsive positioning */}
