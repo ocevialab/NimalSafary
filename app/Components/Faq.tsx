@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import Link from "next/link";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -275,7 +276,10 @@ const FAQ = () => {
       </div>
 
       {/* Inquire More Button */}
-      <div className="flex justify-center mt-8 sm:mt-10 md:mt-12">
+      <Link
+        className="flex justify-center mt-8 sm:mt-10 md:mt-12"
+        href="/contact"
+      >
         <button
           ref={buttonRef}
           className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105  hover:shadow-xl text-sm sm:text-base md:text-lg
@@ -284,7 +288,7 @@ const FAQ = () => {
         >
           Inquire More
         </button>
-      </div>
+      </Link>
     </div>
   );
 };
