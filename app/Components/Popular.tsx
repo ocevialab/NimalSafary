@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,6 +16,9 @@ interface SafariItem {
 }
 
 function Popular(): React.JSX.Element {
+  // State for responsive card display
+  const [showAllCards, setShowAllCards] = useState(false);
+
   // Refs for GSAP animations
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -45,7 +48,32 @@ function Popular(): React.JSX.Element {
       title: "Bundala Nation Park Safari",
       link: "/parks/bundala",
     },
+    {
+      id: 4,
+      img: "/Images/lunu2.webp",
+      title: "Lunugamwehera Nation Park Safari",
+      link: "/parks/lunugamwehera",
+    },
   ];
+
+  // Check screen size and update card display
+  useEffect(() => {
+    const checkScreenSize = () => {
+      // Show 4 cards for screens smaller than lg (below 1024px)
+      // Show only 3 cards for lg screens and above (1024px+)
+      setShowAllCards(window.innerWidth < 1024); // Below lg breakpoint
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // Get cards to display based on screen size
+  const cardsToDisplay = showAllCards
+    ? popularSafaris
+    : popularSafaris.slice(0, 3);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -113,6 +141,7 @@ function Popular(): React.JSX.Element {
           },
         }
       );
+
       // Button animation
       gsap.fromTo(
         buttonRef.current,
@@ -138,7 +167,7 @@ function Popular(): React.JSX.Element {
 
       // Cards animation with stagger
       cardRefs.current.forEach((card, index) => {
-        if (card) {
+        if (card && index < cardsToDisplay.length) {
           const cardImage = card.querySelector(".card-image");
           const cardOverlay = card.querySelector(".card-overlay");
           const cardTitle = card.querySelector(".card-title");
@@ -312,7 +341,7 @@ function Popular(): React.JSX.Element {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [cardsToDisplay]);
 
   return (
     <div
@@ -347,12 +376,12 @@ function Popular(): React.JSX.Element {
         around the world. Discover what makes each park unique.
       </p>
 
-      {/* Safari Cards - Fully responsive grid */}
+      {/* Safari Cards - Responsive grid layout */}
       <div
         ref={cardsContainerRef}
-        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6"
+        className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8"
       >
-        {popularSafaris.map((item, index) => (
+        {cardsToDisplay.map((item, index) => (
           <div
             key={item.id}
             ref={(el) => {
@@ -370,7 +399,7 @@ function Popular(): React.JSX.Element {
                   alt={item.title}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 33vw, 450px"
+                  sizes="(max-width: 1024px) 50vw, 33vw"
                 />
               </div>
 
@@ -381,15 +410,14 @@ function Popular(): React.JSX.Element {
           </div>
         ))}
       </div>
+
       <Link
         href="/safaris"
         className="flex justify-center mt-4 sm:mt-4 md:mt-8 cursor-pointer"
       >
         <button
           ref={buttonRef}
-          className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105  hover:shadow-xl text-sm sm:text-base md:text-lg cursor-poineter
-          
-          "
+          className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm sm:text-base md:text-lg cursor-pointer"
         >
           View More
         </button>
