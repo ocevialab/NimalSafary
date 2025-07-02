@@ -46,7 +46,7 @@ const Footer = () => {
         </button>
       </div>
       <div className="lg:flex-row flex flex-col lg:text-md md:text-sm text-xs lg:mt-8 md:mt-6 sm:mt-4 mt-2 lg:justify-between items-center gap-8 text-center">
-        <div className="md:flex-row flex flex-col gap-4 md:gap-4 lg:gap-6 xl:gap-8">
+        <div className="flex-row flex  gap-4 md:gap-4 lg:gap-6 xl:gap-8">
           <Link href={"/"} className="cursor-pointer hover:text-accent">
             Home
           </Link>
