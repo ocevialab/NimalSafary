@@ -66,7 +66,7 @@ const Footer = () => {
       </div>
       <h1 className="xl:text-[150px] lg:text-[120px] md:text-[100px] sm:text-[80px] text-[40px] h-fit p-0 m-0 font-bold overflow-hidden text-accent text-center w-full">
         {" "}
-        Nimal SAFARI
+        NIMAL SAFARI
       </h1>
     </footer>
   );
