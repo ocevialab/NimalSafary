@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Namal Safari",
+  title: "Nimal Safari",
   description: "Experience the Wild Like Never Before",
   icons: {
     icon: "/favicon.ico", // or "/favicon.png"

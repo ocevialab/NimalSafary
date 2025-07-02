@@ -71,7 +71,7 @@ export default function Hero() {
     }
 
     const message = encodeURIComponent(
-      `Hello! I'm interested in booking a safari with Namal Safari. Could you please share more details about the available packages and timings? Thank you!`
+      `Hello! I'm interested in booking a safari with Nimal Safari. Could you please share more details about the available packages and timings? Thank you!`
     );
 
     // Construct the WhatsApp URL with the '+' in the phone number

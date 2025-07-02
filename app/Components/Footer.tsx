@@ -14,7 +14,7 @@ const Footer = () => {
     }
 
     const message = encodeURIComponent(
-      `Hello! I’d like to get in touch with Namal Safari. Could you please assist me with some information? Thank you!`
+      `Hello! I’d like to get in touch with Nimal Safari. Could you please assist me with some information? Thank you!`
     );
 
     // Construct the WhatsApp URL with the '+' in the phone number
@@ -66,7 +66,7 @@ const Footer = () => {
       </div>
       <h1 className="xl:text-[150px] lg:text-[120px] md:text-[100px] sm:text-[80px] text-[40px] h-fit p-0 m-0 font-bold overflow-hidden text-accent text-center w-full">
         {" "}
-        NAMAL SAFARI
+        Nimal SAFARI
       </h1>
     </footer>
   );
