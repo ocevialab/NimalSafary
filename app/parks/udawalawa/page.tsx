@@ -283,7 +283,7 @@ const Page = () => {
           backgroundImage: "url('/Images/udabig.webp')",
         }}
       >
-        <div className="justify-end h-full w-full xl:py-24 md:px-12 px-6 lg:py-12 md:py-16 py-20 flex flex-col">
+        <div className="justify-end h-full w-full xl:py-24 md:px-12 px-6 lg:py-12 md:py-16 py-8 flex flex-col">
           <h1
             ref={titleRef}
             className="font-bold xl:text-7xl lg:text-6xl md:text-5xl sm:text-4xl text-3xl mb-6"
