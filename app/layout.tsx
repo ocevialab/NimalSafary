@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Footer from "./Components/Footer";
 import ScrollToTop from "./Components/ScrollToTop";
+import WhatsAppChatButton from "./Components/WhatsAppChatButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ScrollToTop />
+        <WhatsAppChatButton />
         {children}
         <Footer />
       </body>
