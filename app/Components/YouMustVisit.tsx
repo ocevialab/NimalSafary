@@ -451,9 +451,34 @@ function YouMustVisit() {
                   {/* Overlay */}
 
                   {/* Title */}
-                  <h3 className="card-title text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl p-2 sm:p-3 md:p-4 absolute left-0 bottom-0 z-20 leading-tight drop-shadow-lg font-medium">
+                  {/* <h3 className="card-title text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl p-2 sm:p-3 md:p-4 absolute left-0 bottom-0 z-20 leading-tight drop-shadow-lg font-medium">
                     {item.title}
-                  </h3>
+                  </h3> */}
+
+                  <div className="absolute left-0 bottom-0 z-10 m-2 sm:m-3 md:m-4">
+                    <h3 className="card-title text-secondary text-xs sm:text-sm lg:text-lg xl:text-md leading-tight drop-shadow-lg mb-1 ">
+                      {item.title}
+                    </h3>
+
+                    <div className="pt-1">
+                      <span className="card-button inline-flex items-center gap-1 bg-accent/90 hover:bg-accent text-muted font-medium py-1.5 px-3 sm:py-2 sm:px-4 rounded-full transition-all duration-300 text-xs sm:text-sm backdrop-blur-sm">
+                        Learn More
+                        <svg
+                          className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </Link>
             </div>

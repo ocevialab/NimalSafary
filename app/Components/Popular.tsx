@@ -13,6 +13,7 @@ interface SafariItem {
   img: string;
   title: string;
   link: string;
+  shortDescription: string;
 }
 
 function Popular(): React.JSX.Element {
@@ -35,24 +36,28 @@ function Popular(): React.JSX.Element {
       img: "/Images/popular1.webp",
       title: "Yala National Park Safari",
       link: "/parks/yala",
+      shortDescription: "High leopard density",
     },
     {
       id: 2,
       img: "/Images/popular2.webp",
       title: "Udawalawa National Park Safari",
       link: "/parks/udawalawa",
+      shortDescription: "Elephant sanctuary",
     },
     {
       id: 3,
       img: "/Images/popular3.webp",
-      title: "Bundala Nation Park Safari",
+      title: "Bundala National Park Safari",
       link: "/parks/bundala",
+      shortDescription: "Migratory birds haven",
     },
     {
       id: 4,
       img: "/Images/lunu2.webp",
-      title: "Lunugamwehera Nation Park Safari",
+      title: "Lunugamwehera National Park Safari",
       link: "/parks/lunugamwehera",
+      shortDescription: "Pristine wilderness",
     },
   ];
 
@@ -171,6 +176,8 @@ function Popular(): React.JSX.Element {
           const cardImage = card.querySelector(".card-image");
           const cardOverlay = card.querySelector(".card-overlay");
           const cardTitle = card.querySelector(".card-title");
+          const cardDescription = card.querySelector(".card-description");
+          const cardButton = card.querySelector(".card-button");
 
           // Initial card animation
           gsap.fromTo(
@@ -247,7 +254,7 @@ function Popular(): React.JSX.Element {
               cardTitle,
               {
                 opacity: 0,
-                y: 50,
+                y: 30,
               },
               {
                 opacity: 1,
@@ -255,6 +262,56 @@ function Popular(): React.JSX.Element {
                 duration: 0.5,
                 ease: "power2.out",
                 delay: index * 0.2 + 0.4,
+                scrollTrigger: {
+                  trigger: cardsContainerRef.current,
+                  start: "top 80%",
+                  end: "bottom 60%",
+                  toggleActions: "play none none reverse",
+                },
+              }
+            );
+          }
+
+          // Description animation
+          if (cardDescription) {
+            gsap.fromTo(
+              cardDescription,
+              {
+                opacity: 0,
+                y: 20,
+              },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                ease: "power2.out",
+                delay: index * 0.2 + 0.5,
+                scrollTrigger: {
+                  trigger: cardsContainerRef.current,
+                  start: "top 80%",
+                  end: "bottom 60%",
+                  toggleActions: "play none none reverse",
+                },
+              }
+            );
+          }
+
+          // Button animation
+          if (cardButton) {
+            gsap.fromTo(
+              cardButton,
+              {
+                opacity: 0,
+                y: 20,
+                scale: 0.9,
+              },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.4,
+                ease: "power2.out",
+                delay: index * 0.2 + 0.6,
                 scrollTrigger: {
                   trigger: cardsContainerRef.current,
                   start: "top 80%",
@@ -284,7 +341,7 @@ function Popular(): React.JSX.Element {
             if (cardOverlay) {
               gsap.to(cardOverlay, {
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3), transparent)",
+                  "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent)",
                 duration: 0.3,
               });
             }
@@ -293,6 +350,21 @@ function Popular(): React.JSX.Element {
               gsap.to(cardTitle, {
                 color: "#fde047", // yellow-300
                 duration: 0.3,
+              });
+            }
+
+            if (cardDescription) {
+              gsap.to(cardDescription, {
+                color: "#fde047", // yellow-300
+                duration: 0.3,
+              });
+            }
+
+            if (cardButton) {
+              gsap.to(cardButton, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out",
               });
             }
           };
@@ -324,6 +396,21 @@ function Popular(): React.JSX.Element {
               gsap.to(cardTitle, {
                 color: "#ffffff",
                 duration: 0.3,
+              });
+            }
+
+            if (cardDescription) {
+              gsap.to(cardDescription, {
+                color: "#e5e7eb", // gray-200
+                duration: 0.3,
+              });
+            }
+
+            if (cardButton) {
+              gsap.to(cardButton, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out",
               });
             }
           };
@@ -398,22 +485,44 @@ function Popular(): React.JSX.Element {
                   src={item.img}
                   alt={item.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700"
                   sizes="(max-width: 1024px) 50vw, 33vw"
                 />
               </div>
 
-              <div className="absolute left-0 bottom-0 z-10 m-2 sm:m-3 md:m-4">
-                <h3 className="card-title text-white text-xs sm:text-sm lg:text-lg xl:text-xl leading-tight drop-shadow-lg mb-1 font-bold">
-                  {item.title}
-                </h3>
+              {/* Overlay for better text visibility */}
+              <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-all duration-300"></div>
 
-                <button
-                  ref={buttonRef}
-                  className="bg-accent hover:bg-accent/80 text-muted font-medium py-1 px-4 sm:px-6 md:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-xs sm:text-sm md:text-sm cursor-pointer"
-                >
-                  learn more
-                </button>
+              {/* Content Container */}
+              <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 md:p-5 z-10">
+                <div className="space-y-2 sm:space-y-3">
+                  <h3 className="card-title text-secondary text-sm sm:text-base md:text-lg lg:text-xl font-bold leading-tight drop-shadow-lg">
+                    {item.title}
+                  </h3>
+
+                  <p className="card-description text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed drop-shadow-md">
+                    {item.shortDescription}
+                  </p>
+
+                  <div className="pt-1">
+                    <span className="card-button inline-flex items-center gap-1 bg-accent/90 hover:bg-accent text-muted font-medium py-1.5 px-3 sm:py-2 sm:px-4 rounded-full transition-all duration-300 text-xs sm:text-sm backdrop-blur-sm">
+                      Learn More
+                      <svg
+                        className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
               </div>
             </Link>
           </div>
@@ -422,13 +531,26 @@ function Popular(): React.JSX.Element {
 
       <Link
         href="/safaris"
-        className="flex justify-center mt-4 sm:mt-4 md:mt-8 cursor-pointer"
+        className="flex justify-center mt-6 sm:mt-8 md:mt-10 cursor-pointer"
       >
         <button
           ref={buttonRef}
-          className="bg-accent hover:bg-accent/80 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm sm:text-base md:text-lg cursor-pointer"
+          className="bg-accent hover:bg-accent/90 text-muted font-medium py-3 px-8 sm:px-10 md:px-12 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm sm:text-base md:text-lg cursor-pointer inline-flex items-center gap-2"
         >
-          View More
+          View All Safaris
+          <svg
+            className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
         </button>
       </Link>
     </div>
