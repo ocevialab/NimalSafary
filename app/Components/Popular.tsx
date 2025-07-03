@@ -403,9 +403,18 @@ function Popular(): React.JSX.Element {
                 />
               </div>
 
-              <h3 className="card-title text-white text-xs sm:text-sm lg:text-lg xl:text-xl m-2 sm:m-3 md:m-4 absolute left-0 bottom-0 z-10 leading-tight drop-shadow-lg">
-                {item.title}
-              </h3>
+              <div className="absolute left-0 bottom-0 z-10 m-2 sm:m-3 md:m-4">
+                <h3 className="card-title text-white text-xs sm:text-sm lg:text-lg xl:text-xl leading-tight drop-shadow-lg mb-1 font-bold">
+                  {item.title}
+                </h3>
+
+                <button
+                  ref={buttonRef}
+                  className="bg-accent hover:bg-accent/80 text-muted font-medium py-1 px-4 sm:px-6 md:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-xs sm:text-sm md:text-sm cursor-pointer"
+                >
+                  learn more
+                </button>
+              </div>
             </Link>
           </div>
         ))}
