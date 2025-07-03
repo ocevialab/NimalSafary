@@ -291,7 +291,7 @@ const Page = () => {
           </h1>
           <div
             ref={buttonRef}
-            className="md:px-8 px-4 md:py-2 py-1 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-sm cursor-pointer transition-all duration-300"
+            className="md:px-12 px-8 md:py-2 py-4 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-md cursor-pointer transition-all duration-300"
             onClick={() => openWhatsAppChat("Bundala National Park")}
           >
             Book Your Safari Now

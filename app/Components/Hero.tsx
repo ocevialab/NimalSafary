@@ -19,46 +19,116 @@ export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const zoomTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
   useEffect(() => {
+    // Start zoom-in animation for the initial image
+    startZoomIn();
+
     const interval = setInterval(() => {
       changeBackgroundImage();
     }, 5000); // Change image every 5 seconds
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      // Clean up any running animations
+      if (zoomTimelineRef.current) {
+        zoomTimelineRef.current.kill();
+      }
+    };
   }, [currentImageIndex]);
+
+  const startZoomIn = () => {
+    if (!backgroundRef.current) return;
+
+    // Kill any existing zoom animation
+    if (zoomTimelineRef.current) {
+      zoomTimelineRef.current.kill();
+    }
+
+    // Reset scale and start zoom-in animation
+    gsap.set(backgroundRef.current, { scale: 1 });
+
+    // Create a new timeline for zoom-in effect
+    zoomTimelineRef.current = gsap.timeline();
+    zoomTimelineRef.current.to(backgroundRef.current, {
+      scale: 1.2,
+      duration: 5,
+      ease: "power1.inOut",
+    });
+  };
 
   const changeBackgroundImage = () => {
     if (!backgroundRef.current || !overlayRef.current) return;
 
     const nextIndex = (currentImageIndex + 1) % heroImageList.length;
 
+    // Kill the zoom animation
+    if (zoomTimelineRef.current) {
+      zoomTimelineRef.current.kill();
+    }
+
     // Create timeline for smooth transition
     const tl = gsap.timeline();
 
-    // First, fade out and zoom in current image
+    // Fade out current image (without zoom-out effect)
     tl.to(backgroundRef.current, {
-      scale: 1.1,
       opacity: 0.3,
       duration: 0.8,
       ease: "power2.inOut",
     })
-      // Then change the background image and reset
+      // Then change the background image and reset scale
       .call(() => {
         if (backgroundRef.current) {
           backgroundRef.current.style.backgroundImage = `url('${heroImageList[nextIndex]}')`;
+          gsap.set(backgroundRef.current, { scale: 1 }); // Reset scale
           setCurrentImageIndex(nextIndex);
         }
       })
-      // Finally, fade in and zoom out new image
+      // Fade in the new image
       .to(backgroundRef.current, {
-        scale: 1,
         opacity: 1,
         duration: 0.8,
-        ease: "power2.inOut",
+        ease: "back.inOut",
+      })
+      // Start zoom-in animation for new image
+      .call(() => {
+        startZoomIn();
       });
+  };
+
+  const handleIndicatorClick = (index: number) => {
+    if (index === currentImageIndex) return;
+
+    // Kill the zoom animation
+    if (zoomTimelineRef.current) {
+      zoomTimelineRef.current.kill();
+    }
+
+    setCurrentImageIndex(index);
+    if (backgroundRef.current) {
+      gsap.to(backgroundRef.current, {
+        opacity: 0.5,
+        duration: 0.4,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (backgroundRef.current) {
+            backgroundRef.current.style.backgroundImage = `url('${heroImageList[index]}')`;
+            gsap.set(backgroundRef.current, { scale: 1 }); // Reset scale
+            gsap.to(backgroundRef.current, {
+              opacity: 1,
+              duration: 0.4,
+              ease: "back.out",
+              onComplete: () => {
+                startZoomIn(); // Start zoom-in for manually selected image
+              },
+            });
+          }
+        },
+      });
+    }
   };
 
   const openWhatsAppChat = () => {
@@ -87,7 +157,7 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full bg-center bg-cover transition-all duration-1000"
         style={{
           backgroundImage: `url('${heroImageList[currentImageIndex]}')`,
-          transform: "scale(1)",
+          backgroundPositionX: "center",
         }}
       />
 
@@ -127,7 +197,7 @@ export default function Hero() {
             national parks.
           </motion.p>
           <motion.div
-            className="md:px-8 px-4 md:py-2 py-1 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-sm cursor-pointer"
+            className="md:px-12 px-8 md:py-2 py-4 bg-accent text-muted font-medium rounded-lg w-fit md:text-md text-md cursor-pointer transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             initial={{ opacity: 0, y: 50 }}
@@ -199,28 +269,7 @@ export default function Hero() {
                 ? "bg-accent w-8"
                 : "bg-white/50 hover:bg-white/70"
             }`}
-            onClick={() => {
-              setCurrentImageIndex(index);
-              if (backgroundRef.current) {
-                gsap.to(backgroundRef.current, {
-                  scale: 1.05,
-                  opacity: 0.5,
-                  duration: 0.4,
-                  ease: "power2.inOut",
-                  onComplete: () => {
-                    if (backgroundRef.current) {
-                      backgroundRef.current.style.backgroundImage = `url('${heroImageList[index]}')`;
-                      gsap.to(backgroundRef.current, {
-                        scale: 1,
-                        opacity: 1,
-                        duration: 0.4,
-                        ease: "power2.inOut",
-                      });
-                    }
-                  },
-                });
-              }
-            }}
+            onClick={() => handleIndicatorClick(index)}
           />
         ))}
       </div>
