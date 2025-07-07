@@ -40,7 +40,7 @@ function YouMustVisit() {
     },
     {
       id: 2,
-      img: "/Images/popular2.webp",
+      img: "/Images/gallery3.webp",
       title: "Udawalawa National Park Safari",
       link: "/parks/udawalawa",
       pinColor: "text-[#FFEA00]",
