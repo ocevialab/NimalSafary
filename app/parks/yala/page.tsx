@@ -7,6 +7,7 @@ import Link from "next/link";
 import Gallery from "@/app/Components/Gallery";
 import Features from "../Features";
 import Nav from "@/app/Components/Nav";
+import ParallaxText from "@/app/Components/ParallaxText";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -295,6 +296,13 @@ const Page = () => {
             onClick={() => openWhatsAppChat("Yala National Park")}
           >
             Book Your Safari Now
+          </div>
+          <div className="text-secondary py-2 bg-black/20 mt-12 overflow-hidden font-normal rounded-2xl">
+            <ParallaxText baseVelocity={-0.8} fontSize="text-[30px]">
+              | We offer free pickup and drop-off from hotels and guesthouses
+              in: - Tissamaharama - Kataragama - Kirinda - Yala (Other areas
+              available on request) |
+            </ParallaxText>
           </div>
         </div>
       </div>

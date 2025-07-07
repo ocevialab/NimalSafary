@@ -324,7 +324,7 @@ const WhyChooseUs: React.FC = () => {
         request)
       </p> */}
       <div className="text-black p-2 bg-accent/40 mt-12 overflow-hidden font-normal">
-        <ParallaxText baseVelocity={-0.6} fontSize="text-[40px]">
+        <ParallaxText baseVelocity={-0.6} fontSize="text-[24px]">
           | We offer free pickup and drop-off from hotels and guesthouses in: -
           Tissamaharama - Kataragama - Kirinda - Yala (Other areas available on
           request) |
