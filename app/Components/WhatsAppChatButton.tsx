@@ -391,7 +391,7 @@ const WhatsAppChatButton: React.FC<WhatsAppChatButtonProps> = ({
           {/* Header */}
           <div
             ref={headerRef}
-            className={`${currentColorClasses.primary} text-white p-4 rounded-t-lg flex justify-between items-center`}
+            className="bg-green-600 hover:bg-green-700 text-white p-4 rounded-t-lg flex justify-between items-center"
             style={{ opacity: 0, transform: "translateY(-20px)" }}
           >
             <div className="flex items-center space-x-3">
