@@ -80,7 +80,7 @@ const Footer = () => {
         NIMAL SAFARI
       </h1> */}
       </footer>
-      <div className="w-full bg-[#D9FFE2]">
+      <div className="w-full bg-[#D9FFE2]  text-accent font-bold">
         <ParallaxText baseVelocity={-0.8} fontSize="text-[200px]">
           NIMAL SAFARI -
         </ParallaxText>
