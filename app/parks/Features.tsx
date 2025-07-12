@@ -321,7 +321,7 @@ const Features: React.FC<FeatureProp> = ({ packageName }) => {
     {
       id: 5,
       icon: "/Icons/bus.png",
-      feature: "Flexible Pickup",
+      feature: "Free Flexible Pickup",
     },
     {
       id: 6,

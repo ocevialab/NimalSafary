@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import Image from "next/image";
-import ParallaxText from "./ParallaxText";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -323,13 +322,11 @@ const WhyChooseUs: React.FC = () => {
         Tissamaharama - Kataragama - Kirinda - Yala (Other areas available on
         request)
       </p> */}
-      <div className="text-black p-2 bg-accent/40 mt-12 overflow-hidden font-normal">
-        <ParallaxText baseVelocity={-0.6} fontSize="text-[24px]">
-          | We offer free pickup and drop-off from hotels and guesthouses in: -
-          Tissamaharama - Kataragama - Kirinda - Yala (Other areas available on
-          request) |
-        </ParallaxText>
-      </div>
+      {/* <div className="text-black p-2 bg-accent/40 mt-12  text-xl overflow-hidden font-normal">
+        We offer free pickup and drop-off from hotels and guesthouses in: -
+        Tissamaharama - Kataragama - Kirinda - Yala (Other areas available on
+        request)
+      </div> */}
     </section>
   );
 };

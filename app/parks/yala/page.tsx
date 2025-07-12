@@ -7,7 +7,6 @@ import Link from "next/link";
 import Gallery from "@/app/Components/Gallery";
 import Features from "../Features";
 import Nav from "@/app/Components/Nav";
-import ParallaxText from "@/app/Components/ParallaxText";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -278,12 +277,16 @@ const Page = () => {
       {/* Hero Section */}
       <div
         ref={containerRef}
-        className="w-full h-screen font-display text-secondary bg-center bg-cover"
+        className="w-full h-screen font-display text-secondary bg-center bg-cover relative"
         style={{
           backgroundImage: "url('/Images/yalabig.webp')",
         }}
       >
-        <div className="justify-end h-full w-full xl:py-24 md:px-12 px-6 lg:py-12 md:py-16 py-8 flex flex-col">
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+        {/* Content */}
+        <div className="relative z-10 justify-end h-full w-full xl:py-24 md:px-12 px-6 lg:py-12 md:py-16 py-8 flex flex-col">
           <h1
             ref={titleRef}
             className="font-bold xl:text-7xl lg:text-6xl md:text-5xl sm:text-4xl text-3xl mb-6"
@@ -297,12 +300,11 @@ const Page = () => {
           >
             Book Your Safari Now
           </div>
-          <div className="text-accent py-2 bg-black/40 mt-12 overflow-hidden font-normal rounded-2xl">
-            <ParallaxText baseVelocity={-0.8} fontSize="text-[30px]">
-              | We offer free pickup and drop-off from hotels and guesthouses
-              in: - Tissamaharama - Kataragama - Kirinda - Yala (Other areas
-              available on request) |
-            </ParallaxText>
+          <div className="text-secondary  w-full item-left text-left lg:text-2xl text-lg  py-6 px-8 mt-12 overflow-hidden font-normal rounded-2xl backdrop-blur-md bg-primary/20 border border-primary/20 shadow-lg">
+            &quot; We offer{" "}
+            <span className="text-accent">free pickup and drop-off </span> from
+            hotels and guesthouses in: - Tissamaharama - Kataragama - Kirinda -
+            Yala (Other areas available on request) &quot;
           </div>
         </div>
       </div>
