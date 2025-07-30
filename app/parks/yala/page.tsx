@@ -9,6 +9,16 @@ import Features from "../Features";
 import Nav from "@/app/Components/Nav";
 import FreePick from "../freePick";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Yala National Park Safari",
+  description:
+    "Explore the wonders of Yala National Park with Nimal Safari. Natinal Park is renowned for its rich biodiversity, including the highest density of leopards in the world. Join us for an unforgettable safari experience.",
+  keywords:
+    "Yala National Park, Safari, Wildlife, Sri Lanka, Nimal Safari, leopard sightings, nature tours, leopard safari, wildlife photography",
+};
+
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
