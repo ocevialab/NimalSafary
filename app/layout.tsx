@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+// Import the GoogleAnalytics component
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 import Footer from "./Components/Footer";
 import ScrollToTop from "./Components/ScrollToTop";
 import WhatsAppChatButton from "./Components/WhatsAppChatButton";
@@ -38,7 +41,14 @@ export default function RootLayout({
         <WhatsAppChatButton />
         {children}
         <Footer />
+
+        {/*
+          Add the GoogleAnalytics component here.
+          Replace 'G-VLXEQQL4J7' with your actual Measurement ID.
+          This will inject the Google Analytics script for every page.
+        */}
       </body>
+      <GoogleAnalytics gaId="G-VLXEQQL4J7" />
     </html>
   );
 }
