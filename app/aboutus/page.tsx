@@ -8,6 +8,27 @@ import Image from "next/image";
 import AboutGal from "./AboutGal";
 import WhyChooseUs from "../Components/WhyChooseUs";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us - Nimal Safari",
+  description:
+    "Learn about Nimal Safari's legacy and commitment to wildlife tours.",
+  icons: {
+    icon: "/favicon.ico", // or "/favicon.png"
+  },
+  keywords: [
+    "Nimal Safari",
+    "About Us",
+    "Wildlife Tours",
+    "Sri Lanka",
+    "Nature",
+    "Conservation",
+    "history",
+    "1976",
+  ],
+};
+
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
