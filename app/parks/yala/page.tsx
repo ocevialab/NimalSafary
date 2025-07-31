@@ -1,28 +1,33 @@
 // app/about/page.tsx (Server Component)
 import type { Metadata } from "next";
-import AboutPageClient from "./AboutPageClient";
+
+import YalaClient from "./YalaClient";
 
 export const metadata: Metadata = {
-  title: "About Us - Nimal Safari",
+  title: "Yala National Park - Nimal Safari",
   description:
-    "Learn about Nimal Safari's legacy and commitment to wildlife tours.",
+    "Explore the wonders of Yala National Park with Nimal Safari. National Park is renowned for its rich biodiversity, including the highest density of leopards in the world. Join us for an unforgettable safari experience.",
   icons: {
     icon: "/favicon.ico", // or "/favicon.png"
   },
   keywords: [
+    "Yala National Park",
+    "Sri Lanka safari",
+    "wildlife tours",
+    "leopard safari",
+    "elephant safari",
+    "birdwatching tours",
+    "nature tours",
+    "eco-tourism",
     "Nimal Safari",
-    "About Us",
-    "Wildlife Tours",
-    "Sri Lanka",
-    "Nature",
-    "Conservation",
-    "history",
-    "1976",
+    "Yala safari packages",
+    "Yala wildlife adventure",
+    "Yala National Park tours",
   ],
 };
 
 const Page = () => {
-  return <AboutPageClient />;
+  return <YalaClient />;
 };
 
 export default Page;
