@@ -6,7 +6,7 @@ import YalaClient from "./YalaClient";
 export const metadata: Metadata = {
   title: "Yala National Park - Nimal Safari",
   description:
-    "Explore the wonders of Yala National Park with Nimal Safari. National Park is renowned for its rich biodiversity, including the highest density of leopards in the world. Join us for an unforgettable safari experience.",
+    "Explore the wonders of Yala National Park with Nimal Safari. National Park is renowned for its rich biodiversity, including the highest density of leopards in the world. Join us for an unforgettable safari experience. Safari in Sri Lanka.",
   icons: {
     icon: "/favicon.ico", // or "/favicon.png"
   },
