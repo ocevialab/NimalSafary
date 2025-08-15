@@ -234,12 +234,7 @@ function AboutGal({ images }: AboutGalProps) {
         ref={descriptionRef}
       >
         <p>
-          Nestled in the southern plains of Sri Lanka, Udawalawe National Park
-          is a premier destination for unforgettable wildlife encounters.
-          Covering over 300 square kilometers of open grasslands, forest
-          patches, and the scenic Udawalawe Reservoir, the park is renowned for
-          its large elephant population and consistent sightings of wildlife in
-          their natural habitat.
+         "Explore Nimal Safari’s heritage gallery – vintage photos of jeep safaris in Sri Lanka, celebrating decades of wildlife tours, tradition, and adventure."
         </p>
       </div>
 
