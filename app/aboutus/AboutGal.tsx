@@ -234,7 +234,7 @@ function AboutGal({ images }: AboutGalProps) {
         ref={descriptionRef}
       >
         <p>
-         "Explore Nimal Safari’s heritage gallery – vintage photos of jeep safaris in Sri Lanka, celebrating decades of wildlife tours, tradition, and adventure."
+         Explore Nimal Safari’s heritage gallery – vintage photos of jeep safaris in Sri Lanka, celebrating decades of wildlife tours, tradition, and adventure.
         </p>
       </div>
 
