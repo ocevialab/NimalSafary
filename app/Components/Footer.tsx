@@ -72,72 +72,52 @@ const Footer = () => {
               Contact
             </Link>
           </div>
-          <div className="w-fit flex flex-row px-6 mt-4 justify-center gap-14">
-            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+          <div className="w-fit flex flex-row px-6 mt-4 justify-center gap-6 sm:gap-10">
+            {[
+              {
+                href: "https://web.facebook.com/profile.php?id=61579240436619",
+                src: "/images/facebook.png",
+                label: "Facebook",
+              },
+              {
+                href: "https://www.instagram.com/nimalsafari?igsh=cGk0c3BuczhwYWpi&utm_source=ig_contact_invite",
+                src: "/images/insta.png",
+                label: "Instagram",
+              },
+              {
+                href: "https://www.tiktok.com/@nimalsafari?_t=ZS-8yhX4nqCP1l&_r=1",
+                src: "/images/tiktok.png",
+                label: "TikTok",
+              },
+              {
+                href: "https://www.pinterest.com/nimalsafariyala/",
+                src: "/images/pinterest.png",
+                label: "Pinterest",
+              },
+              {
+                href: "https://www.tripadvisor.com/Attraction_Review-g1102395-d5512904-Reviews-Nimal_Safari-Tissamaharama_Southern_Province.html",
+                src: "/images/trip.png",
+                label: "TripAdvisor",
+              },
+            ].map(({ href, src, label }) => (
               <a
-                href="https://web.facebook.com/profile.php?id=61579240436619"
-                className="flex flex-col justify-center items-center"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="group inline-flex items-center justify-center rounded-xl p-2 sm:p-2.5 hover:bg-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400"
               >
                 <Image
-                  src="/images/facebook.png"
-                  alt="Facebook"
-                  width={18}
-                  height={18}
+                  src={src}
+                  alt={label}
+                  width={36}
+                  height={36}
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-7 md:h-7" // mobile upscales here
+                  loading="lazy"
                 />
               </a>
-            </div>
-            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
-              <a
-                href="https://www.instagram.com/nimalsafari?igsh=cGk0c3BuczhwYWpi&utm_source=ig_contact_invite"
-                className="flex flex-col justify-center items-center"
-              >
-                <Image
-                  src="/images/insta.png"
-                  alt="Instagram"
-                  width={18}
-                  height={18}
-                />
-              </a>
-            </div>
-            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
-              <a
-                href="https://www.tiktok.com/@nimalsafari?_t=ZS-8yhX4nqCP1l&_r=1"
-                className="flex flex-col justify-center items-center"
-              >
-                <Image
-                  src="/images/tiktok.png"
-                  alt="TikTok"
-                  width={18}
-                  height={18}
-                />
-              </a>
-            </div>
-            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
-              <a
-                href="https://www.pinterest.com/nimalsafariyala/"
-                className="flex flex-col justify-center items-center"
-              >
-                <Image
-                  src="/images/pinterest.png"
-                  alt="Pinterest"
-                  width={18}
-                  height={18}
-                />
-              </a>
-            </div>
-            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
-              <a
-                href="https://www.tripadvisor.com/Attraction_Review-g1102395-d5512904-Reviews-Nimal_Safari-Tissamaharama_Southern_Province.html"
-                className="flex flex-col justify-center items-center"
-              >
-                <Image
-                  src="/images/trip.png"
-                  alt="TripAdvisor"
-                  width={18}
-                  height={18}
-                />
-              </a>
-            </div>
+            ))}
           </div>
         </div>
         {/* <h1 className="xl:text-[150px] lg:text-[120px] md:text-[100px] sm:text-[80px] text-[40px] h-fit p-0 m-0 font-bold overflow-hidden text-accent text-center w-full">
