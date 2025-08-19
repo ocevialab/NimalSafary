@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import ParallaxText from "./ParallaxText";
+import Image from "next/image";
 
 const Footer = () => {
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
@@ -71,8 +72,72 @@ const Footer = () => {
               Contact
             </Link>
           </div>
-          <div className="text-center">
-            © 2025 Nimal Safari All Rights Reserved. A Ocevialab website{" "}
+          <div className="w-fit flex flex-row px-6 mt-4 justify-center gap-14">
+            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+              <a
+                href="https://web.facebook.com/profile.php?id=61579240436619"
+                className="flex flex-col justify-center items-center"
+              >
+                <Image
+                  src="/images/facebook.png"
+                  alt="Facebook"
+                  width={18}
+                  height={18}
+                />
+              </a>
+            </div>
+            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+              <a
+                href="https://www.instagram.com/nimalsafari?igsh=cGk0c3BuczhwYWpi&utm_source=ig_contact_invite"
+                className="flex flex-col justify-center items-center"
+              >
+                <Image
+                  src="/images/insta.png"
+                  alt="Instagram"
+                  width={18}
+                  height={18}
+                />
+              </a>
+            </div>
+            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+              <a
+                href="https://www.tiktok.com/@nimalsafari?_t=ZS-8yhX4nqCP1l&_r=1"
+                className="flex flex-col justify-center items-center"
+              >
+                <Image
+                  src="/images/tiktok.png"
+                  alt="TikTok"
+                  width={18}
+                  height={18}
+                />
+              </a>
+            </div>
+            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+              <a
+                href="https://www.pinterest.com/nimalsafariyala/"
+                className="flex flex-col justify-center items-center"
+              >
+                <Image
+                  src="/images/pinterest.png"
+                  alt="Pinterest"
+                  width={18}
+                  height={18}
+                />
+              </a>
+            </div>
+            <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+              <a
+                href="https://www.tripadvisor.com/Attraction_Review-g1102395-d5512904-Reviews-Nimal_Safari-Tissamaharama_Southern_Province.html"
+                className="flex flex-col justify-center items-center"
+              >
+                <Image
+                  src="/images/trip.png"
+                  alt="TripAdvisor"
+                  width={18}
+                  height={18}
+                />
+              </a>
+            </div>
           </div>
         </div>
         {/* <h1 className="xl:text-[150px] lg:text-[120px] md:text-[100px] sm:text-[80px] text-[40px] h-fit p-0 m-0 font-bold overflow-hidden text-accent text-center w-full">
@@ -80,6 +145,9 @@ const Footer = () => {
         NIMAL SAFARI
       </h1> */}
       </footer>
+      <div className="text-center  text-sm pt-4  bg-[#D9FFE2] ">
+        © 2025 Nimal Safari All Rights Reserved. A Ocevialab website{" "}
+      </div>
       <div className="w-full bg-[#D9FFE2]  text-accent font-bold">
         <ParallaxText baseVelocity={-0.8} fontSize="text-[200px]">
           NIMAL SAFARI -
