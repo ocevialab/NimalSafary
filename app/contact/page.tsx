@@ -8,6 +8,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { IoMailOutline } from "react-icons/io5";
 import { IoLocationOutline } from "react-icons/io5";
 import { FiPhoneCall } from "react-icons/fi";
+import Image from "next/image";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -166,6 +167,73 @@ const ContactPage: React.FC = () => {
             <div className="contact-item flex flex-row lg:gap-12 gap-4 cursor-pointer">
               <IoLocationOutline className="lg:text-2xl text-xl" />
               <p className="lg:text-xl text-lg">Tissamaharama, Sri Lanka</p>
+            </div>
+            <div className="w-full flex flex-row px-6 mt-4 justify-start gap-14">
+              <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+                <a
+                  href="https://web.facebook.com/profile.php?id=61579240436619"
+                  className="flex flex-col justify-center items-center"
+                >
+                  <Image
+                    src="/images/facebook.png"
+                    alt="Facebook"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </div>
+              <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+                <a
+                  href="https://www.instagram.com/nimalsafari?igsh=cGk0c3BuczhwYWpi&utm_source=ig_contact_invite"
+                  className="flex flex-col justify-center items-center"
+                >
+                  <Image
+                    src="/images/insta.png"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </div>
+              <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+                <a
+                  href="https://www.tiktok.com/@nimalsafari?_t=ZS-8yhX4nqCP1l&_r=1"
+                  className="flex flex-col justify-center items-center"
+                >
+                  <Image
+                    src="/images/tiktok.png"
+                    alt="TikTok"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </div>
+              <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+                <a
+                  href="https://www.pinterest.com/nimalsafariyala/"
+                  className="flex flex-col justify-center items-center"
+                >
+                  <Image
+                    src="/images/pinterest.png"
+                    alt="Pinterest"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </div>
+              <div className="cursor-pointer hover:bg-amber-200 p-2 rounded-xl w-fit h-fit items-center">
+                <a
+                  href="https://www.tripadvisor.com/Attraction_Review-g1102395-d5512904-Reviews-Nimal_Safari-Tissamaharama_Southern_Province.html"
+                  className="flex flex-col justify-center items-center"
+                >
+                  <Image
+                    src="/images/trip.png"
+                    alt="TripAdvisor"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </div>
             </div>
           </div>
 
