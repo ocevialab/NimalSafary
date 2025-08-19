@@ -175,7 +175,7 @@ const ContactPage: React.FC = () => {
                   className="flex flex-col justify-center items-center"
                 >
                   <Image
-                    src="/images/facebook.png"
+                    src="/Images/facebook.png"
                     alt="Facebook"
                     width={24}
                     height={24}
@@ -188,7 +188,7 @@ const ContactPage: React.FC = () => {
                   className="flex flex-col justify-center items-center"
                 >
                   <Image
-                    src="/images/insta.png"
+                    src="/Images/insta.png"
                     alt="Instagram"
                     width={24}
                     height={24}
@@ -201,7 +201,7 @@ const ContactPage: React.FC = () => {
                   className="flex flex-col justify-center items-center"
                 >
                   <Image
-                    src="/images/tiktok.png"
+                    src="/Images/tiktok.png"
                     alt="TikTok"
                     width={24}
                     height={24}
@@ -214,7 +214,7 @@ const ContactPage: React.FC = () => {
                   className="flex flex-col justify-center items-center"
                 >
                   <Image
-                    src="/images/pinterest.png"
+                    src="/Images/pinterest.png"
                     alt="Pinterest"
                     width={24}
                     height={24}
@@ -227,7 +227,7 @@ const ContactPage: React.FC = () => {
                   className="flex flex-col justify-center items-center"
                 >
                   <Image
-                    src="/images/trip.png"
+                    src="/Images/trip.png"
                     alt="TripAdvisor"
                     width={24}
                     height={24}

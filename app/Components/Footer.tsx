@@ -76,27 +76,27 @@ const Footer = () => {
             {[
               {
                 href: "https://web.facebook.com/profile.php?id=61579240436619",
-                src: "/images/facebook.png",
+                src: "/Images/facebook.png",
                 label: "Facebook",
               },
               {
                 href: "https://www.instagram.com/nimalsafari?igsh=cGk0c3BuczhwYWpi&utm_source=ig_contact_invite",
-                src: "/images/insta.png",
+                src: "/Images/insta.png",
                 label: "Instagram",
               },
               {
                 href: "https://www.tiktok.com/@nimalsafari?_t=ZS-8yhX4nqCP1l&_r=1",
-                src: "/images/tiktok.png",
+                src: "/Images/tiktok.png",
                 label: "TikTok",
               },
               {
                 href: "https://www.pinterest.com/nimalsafariyala/",
-                src: "/images/pinterest.png",
+                src: "/Images/pinterest.png",
                 label: "Pinterest",
               },
               {
                 href: "https://www.tripadvisor.com/Attraction_Review-g1102395-d5512904-Reviews-Nimal_Safari-Tissamaharama_Southern_Province.html",
-                src: "/images/trip.png",
+                src: "/Images/trip.png",
                 label: "TripAdvisor",
               },
             ].map(({ href, src, label }) => (
