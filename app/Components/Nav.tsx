@@ -8,6 +8,7 @@ import { gsap } from "gsap";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/safaris", label: "Safaris" },
+  { href: "/blog", label: "Blog" },
   { href: "/aboutus", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
