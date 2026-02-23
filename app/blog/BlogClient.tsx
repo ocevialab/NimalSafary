@@ -817,7 +817,8 @@ Working with experienced guides who understand current animal locations and move
     },
   ];
 
-const BlogClient = () => {
+// Component that uses search params - needs to be wrapped in Suspense
+const BlogContent = () => {
   const searchParams = useSearchParams();
 
   // Get initial post from query parameter or default to first post
@@ -842,6 +843,12 @@ const BlogClient = () => {
       }
     }
   }, [searchParams]);
+
+  return <BlogClientContent selectedPost={selectedPost} setSelectedPost={setSelectedPost} />;
+};
+
+// Main blog content component (doesn't use search params)
+const BlogClientContent = ({ selectedPost, setSelectedPost }: { selectedPost: BlogPost; setSelectedPost: (post: BlogPost) => void }) => {
 
   // Refs for animations
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1184,5 +1191,6 @@ const BlogClient = () => {
   );
 };
 
-export default BlogClient;
+// Export BlogContent for use with Suspense
+export { BlogContent };
 

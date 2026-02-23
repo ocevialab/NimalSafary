@@ -1,5 +1,6 @@
-import BlogClient from "./BlogClient";
+import { BlogContent } from "./BlogClient";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Safari Blog | Nimal Safari - Wildlife Safari Stories, Tips & Guides",
@@ -30,7 +31,15 @@ export const metadata: Metadata = {
 };
 
 const Page = () => {
-  return <BlogClient />;
+  return (
+    <Suspense fallback={
+      <div className="w-full min-h-screen bg-background flex items-center justify-center">
+        <div className="text-primary text-lg">Loading blog...</div>
+      </div>
+    }>
+      <BlogContent />
+    </Suspense>
+  );
 };
 
 export default Page;
