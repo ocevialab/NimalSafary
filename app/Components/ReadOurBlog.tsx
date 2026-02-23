@@ -203,12 +203,12 @@ function ReadOurBlog() {
   return (
     <section
       ref={containerRef}
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 md:py-10 lg:py-12 bg-background font-display"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24 bg-background font-display"
     >
       {/* Header Section */}
       <header
         ref={headerRef}
-        className="flex flex-row gap-2 sm:gap-3 md:gap-4 items-center mb-6 sm:mb-8"
+        className="flex flex-row gap-2 sm:gap-3 md:gap-4 items-center mb-10 sm:mb-12 md:mb-16"
       >
         <hr
           ref={lineRef}
@@ -225,10 +225,10 @@ function ReadOurBlog() {
       {/* Slider Container */}
       <div
         ref={sliderWrapperRef}
-        className="relative w-full max-w-6xl mx-auto"
+        className="relative w-full max-w-[95%] lg:max-w-[90%] xl:max-w-[85%] mx-auto"
       >
         {/* Slides Wrapper with overflow hidden */}
-        <div className="relative overflow-hidden rounded-2xl shadow-xl">
+        <div className="relative overflow-hidden rounded-3xl shadow-2xl mx-12 sm:mx-16 md:mx-20">
           {/* Slides Container - moves horizontally */}
           <div
             ref={slidesContainerRef}
@@ -239,10 +239,10 @@ function ReadOurBlog() {
               <Link
                 key={blog.id}
                 href={`/blog?post=${blog.id}`}
-                className="block w-full flex-shrink-0 group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="block w-full flex-shrink-0 group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100"
                 style={{ width: `${100 / recentBlogs.length}%` }}
               >
-                <div className="flex flex-col md:flex-row h-[400px] sm:h-[450px] md:h-[500px]">
+                <div className="flex flex-col md:flex-row h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px]">
                   {/* Left Side - Content */}
                   <div className="flex-1 flex flex-col justify-center p-6 sm:p-8 md:p-10 lg:p-12 bg-background">
                     {/* Category Badge */}
@@ -289,15 +289,16 @@ function ReadOurBlog() {
                   </div>
 
                   {/* Right Side - Image */}
-                  <div className="w-full md:w-1/2 h-48 sm:h-64 md:h-full relative overflow-hidden bg-gray-200">
+                  <div className="w-full md:w-1/2 h-64 sm:h-80 md:h-full relative overflow-hidden bg-gray-200">
                     <Image
                       src={blog.image}
                       alt={blog.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 700px"
                       priority={index === 0}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background/10 md:hidden" />
                   </div>
                 </div>
               </Link>
@@ -312,7 +313,7 @@ function ReadOurBlog() {
             prevSlide();
           }}
           disabled={isTransitioning}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white backdrop-blur-sm text-primary p-2.5 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute -left-8 sm:-left-10 md:-left-12 lg:-left-14 top-1/2 -translate-y-1/2 z-30 bg-white/95 hover:bg-white backdrop-blur-sm text-primary p-2.5 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200"
           aria-label="Previous slide"
         >
           <FaChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -324,7 +325,7 @@ function ReadOurBlog() {
             nextSlide();
           }}
           disabled={isTransitioning}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white backdrop-blur-sm text-primary p-2.5 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute -right-8 sm:-right-10 md:-right-12 lg:-right-14 top-1/2 -translate-y-1/2 z-30 bg-white/95 hover:bg-white backdrop-blur-sm text-primary p-2.5 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200"
           aria-label="Next slide"
         >
           <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
