@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Nav from "@/app/Components/Nav";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -20,9 +21,8 @@ interface BlogPost {
   readTime: string;
 }
 
-const BlogClient = () => {
-  // Sample blog data - replace with your actual data source
-  const blogPosts: BlogPost[] = [
+// Sample blog data - replace with your actual data source
+const blogPosts: BlogPost[] = [
     {
       id: 1,
       title: "The Ultimate Safari Guide: Spotting Leopards in Yala National Park",
@@ -817,7 +817,31 @@ Working with experienced guides who understand current animal locations and move
     },
   ];
 
-  const [selectedPost, setSelectedPost] = useState<BlogPost>(blogPosts[0]);
+const BlogClient = () => {
+  const searchParams = useSearchParams();
+
+  // Get initial post from query parameter or default to first post
+  const getInitialPost = () => {
+    const postId = searchParams.get('post');
+    if (postId) {
+      const post = blogPosts.find(p => p.id === parseInt(postId));
+      if (post) return post;
+    }
+    return blogPosts[0];
+  };
+
+  const [selectedPost, setSelectedPost] = useState<BlogPost>(getInitialPost());
+
+  // Update selected post when query parameter changes
+  useEffect(() => {
+    const postId = searchParams.get('post');
+    if (postId) {
+      const post = blogPosts.find(p => p.id === parseInt(postId));
+      if (post) {
+        setSelectedPost(post);
+      }
+    }
+  }, [searchParams]);
 
   // Refs for animations
   const containerRef = useRef<HTMLDivElement>(null);

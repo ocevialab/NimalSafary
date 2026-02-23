@@ -8,6 +8,7 @@ import Nav from "./Components/Nav";
 import Popular from "./Components/Popular";
 import WhyChooseUs from "./Components/WhyChooseUs";
 import YouMustVisit from "./Components/YouMustVisit";
+import ReadOurBlog from "./Components/ReadOurBlog";
 
 import type { Metadata } from "next";
 
@@ -26,6 +27,7 @@ export default function Home() {
       <Hero />
       <Popular />
       <YouMustVisit />
+      <ReadOurBlog />
       <Gallery_Home />
       <About_Home />
       <WhyChooseUs />
