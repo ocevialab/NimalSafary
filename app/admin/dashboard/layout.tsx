@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { FiLayout, FiFileText, FiPlus, FiEdit, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
+import { FiLayout, FiFileText, FiPlus, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 
 export default function AdminLayout({
   children,
@@ -16,10 +16,6 @@ export default function AdminLayout({
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
   const checkAuth = async () => {
     try {
       const res = await fetch('/api/auth/check');
@@ -29,12 +25,17 @@ export default function AdminLayout({
       } else {
         router.push('/admin/login');
       }
-    } catch (error) {
+    } catch {
       router.push('/admin/login');
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogout = async () => {
     try {

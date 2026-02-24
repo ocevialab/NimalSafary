@@ -3,7 +3,7 @@ import { getAllBlogs, createBlog } from '@/lib/blog-storage';
 import { getSession } from '@/lib/auth';
 
 // GET all blogs
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const blogs = await getAllBlogs();
     // Sort by date (newest first)

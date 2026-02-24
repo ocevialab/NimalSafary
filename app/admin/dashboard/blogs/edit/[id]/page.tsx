@@ -27,10 +27,6 @@ export default function EditBlog() {
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState<BlogPost | null>(null);
 
-  useEffect(() => {
-    fetchBlog();
-  }, [id]);
-
   const fetchBlog = async () => {
     try {
       const res = await fetch(`/api/blogs/${id}`);
@@ -48,6 +44,11 @@ export default function EditBlog() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchBlog();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>

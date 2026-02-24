@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const session = await getSession();
     return NextResponse.json({ authenticated: !!session, user: session });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ authenticated: false });
   }
 }
