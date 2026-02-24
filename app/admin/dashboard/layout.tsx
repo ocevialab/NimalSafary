@@ -23,10 +23,13 @@ export default function AdminLayout({
       if (data.authenticated) {
         setAuthenticated(true);
       } else {
-        router.push('/admin/login');
+        // Use replace instead of push to avoid adding to history
+        router.replace('/admin/login');
+        return; // Exit early
       }
     } catch {
-      router.push('/admin/login');
+      router.replace('/admin/login');
+      return; // Exit early
     } finally {
       setLoading(false);
     }
