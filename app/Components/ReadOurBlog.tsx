@@ -19,44 +19,34 @@ interface BlogPost {
   readTime: string;
 }
 
-// Recent 3 blog posts data
-const recentBlogs: BlogPost[] = [
-  {
-    id: 1,
-    title: "The Ultimate Safari Guide: Spotting Leopards in Yala National Park",
-    excerpt:
-      "Embark on an unforgettable safari adventure in Yala National Park, where nature's most elusive predator awaits.",
-    image: "/Images/yala1.webp",
-    category: "Wildlife",
-    date: "2024-01-15",
-    readTime: "15 min read",
-  },
-  {
-    id: 2,
-    title: "Safari Adventure: Elephant Encounters in Udawalawe's Natural Paradise",
-    excerpt:
-      "Experience the magic of an authentic safari adventure as you watch wild elephants roam freely in their natural habitat.",
-    image: "/Images/lunu3.webp",
-    category: "Wildlife",
-    date: "2024-01-10",
-    readTime: "12 min read",
-  },
-  {
-    id: 3,
-    title: "Nature's Symphony: Birdwatching Safari in Bundala's Wetland Paradise",
-    excerpt:
-      "Discover the incredible bird diversity of Bundala on an immersive safari experience through this Ramsar wetland site.",
-    image: "/Images/bu1.webp",
-    category: "Birdwatching",
-    date: "2024-01-05",
-    readTime: "14 min read",
-  },
-];
-
 function ReadOurBlog() {
+  const [recentBlogs, setRecentBlogs] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Fetch blogs from API
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await fetch('/api/blogs');
+        const data = await res.json();
+        // Get the 3 most recent blogs (or all if less than 3)
+        const sorted = data.sort((a: BlogPost, b: BlogPost) => 
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        setRecentBlogs(sorted.slice(0, 3));
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        setRecentBlogs([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
 
   // Refs for GSAP animations
   const containerRef = useRef<HTMLElement>(null);
@@ -68,14 +58,14 @@ function ReadOurBlog() {
 
   // Auto-play slider
   useEffect(() => {
-    if (!isAutoPlaying || isTransitioning) return;
+    if (!isAutoPlaying || isTransitioning || recentBlogs.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % recentBlogs.length);
     }, 4000); // Change slide every 4 seconds
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, isTransitioning]);
+  }, [isAutoPlaying, isTransitioning, recentBlogs.length]);
 
   // GSAP animations for header
   useEffect(() => {
@@ -149,7 +139,7 @@ function ReadOurBlog() {
 
   // Perfect slide transition using GSAP
   useEffect(() => {
-    if (!slidesContainerRef.current) return;
+    if (!slidesContainerRef.current || recentBlogs.length === 0) return;
 
     setIsTransitioning(true);
     
@@ -171,7 +161,7 @@ function ReadOurBlog() {
         setIsTransitioning(false);
       },
     });
-  }, [currentSlide]);
+  }, [currentSlide, recentBlogs.length]);
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -199,6 +189,19 @@ function ReadOurBlog() {
       day: "numeric",
     });
   };
+
+  // Don't render if loading or no blogs
+  if (loading) {
+    return (
+      <section className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24 bg-background font-display">
+        <div className="text-center text-primary">Loading blogs...</div>
+      </section>
+    );
+  }
+
+  if (recentBlogs.length === 0) {
+    return null; // Don't show section if no blogs
+  }
 
   return (
     <section
