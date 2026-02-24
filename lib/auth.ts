@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Change this in production
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'nimal@#2323#@';
 
 export interface AuthUser {
   username: string;
