@@ -350,7 +350,6 @@ const SafarisClient = () => {
             Safaris
           </h2>
         </div>
-
         {/* Safari Cards Section */}
         <div
           ref={cardsContainerRef}

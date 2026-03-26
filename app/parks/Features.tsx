@@ -375,6 +375,21 @@ const Features: React.FC<FeatureProp> = ({ packageName }) => {
         </div>
       </div>
 
+      <div className="w-full rounded-2xl border border-primary/20 bg-[#D9FFE2] p-4 md:p-6 mb-8">
+        <h3 className="text-lg md:text-2xl font-semibold text-primary mb-3">
+          Private Jeep Safari Prices
+        </h3>
+        <ul className="space-y-2 text-sm md:text-lg text-primary">
+          <li>Morning Safari - LKR 15,000</li>
+          <li>Evening Safari - LKR 15,000</li>
+          <li>Full Day Safari - LKR 30,000</li>
+        </ul>
+        <p className="mt-3 text-xs md:text-sm text-primary/80">
+          Price can vary according to your requirements, please contact us via
+          WhatsApp.
+        </p>
+      </div>
+
       <div
         ref={featuresGridRef}
         className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2 sm:gap-3 md:gap-4 lg:gap-6 justify-items-center w-full"
