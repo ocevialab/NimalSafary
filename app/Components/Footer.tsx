@@ -71,6 +71,12 @@ const Footer = () => {
             >
               Contact
             </Link>
+            <Link
+              href={"/terms-and-conditions"}
+              className="cursor-pointer hover:text-accent"
+            >
+              Terms & Conditions
+            </Link>
           </div>
           <div className="w-fit flex flex-row px-6 mt-4 justify-center gap-6 sm:gap-10">
             {[
