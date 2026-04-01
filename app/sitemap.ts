@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/aboutus`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -53,25 +59,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/parks/udawalawa`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.5,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/parks/yala`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.5,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/parks/bundala`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.5,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/parks/lunugamwehera`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.5,
+      priority: 0.8,
     },
   ];
 

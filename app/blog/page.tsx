@@ -3,30 +3,40 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Safari Blog | Nimal Safari - Wildlife Safari Stories, Tips & Guides",
+  title: "Sri Lanka Safari Blog | Wildlife Tips, Guides & Stories",
   description:
-    "Discover expert safari guides, wildlife photography tips, and in-depth articles about Sri Lankan national parks. Learn about leopard spotting in Yala, elephant encounters in Udawalawe, birdwatching in Bundala, and essential safari travel tips from experienced guides.",
+    "Expert safari guides, wildlife photography tips, and in-depth articles about Sri Lankan national parks. Leopard spotting in Yala, elephant encounters in Udawalawa, birdwatching in Bundala & more.",
   keywords: [
-    "safari blog",
-    "Sri Lanka wildlife blog",
-    "safari tips",
-    "wildlife photography tips",
-    "Yala safari blog",
-    "Udawalawe safari stories",
-    "Bundala birdwatching",
-    "safari experiences",
-    "wildlife conservation",
-    "leopard spotting guide",
-    "elephant viewing tips",
-    "safari photography",
-    "Sri Lanka national parks guide",
+    "sri lanka safari blog",
+    "safari tips sri lanka",
+    "yala safari guide",
+    "udawalawa safari tips",
+    "wildlife photography sri lanka",
+    "safari in sri lanka guide",
+    "leopard spotting yala",
+    "elephant viewing udawalawa",
+    "bundala birdwatching",
     "safari travel tips",
-    "wildlife viewing guide",
+    "sri lanka wildlife guide",
+    "safari experiences sri lanka",
   ],
+  alternates: {
+    canonical: "https://nimalsafari.com/blog",
+  },
   openGraph: {
-    title: "Safari Blog | Nimal Safari - Wildlife Safari Stories & Tips",
-    description: "Expert safari guides, wildlife photography tips, and in-depth articles about Sri Lankan national parks.",
+    title: "Sri Lanka Safari Blog | Wildlife Tips, Guides & Stories",
+    description:
+      "Expert safari guides, wildlife photography tips, and in-depth articles about Sri Lankan national parks. Yala, Udawalawa, Bundala & more.",
+    url: "https://nimalsafari.com/blog",
+    images: [{ url: "/og-blog.jpg", width: 1200, height: 630, alt: "Sri Lanka Safari Blog" }],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sri Lanka Safari Blog | Wildlife Tips, Guides & Stories",
+    description:
+      "Expert safari guides and wildlife tips for Sri Lanka. Yala, Udawalawa, Bundala & more.",
+    images: ["/og-blog.jpg"],
   },
 };
 

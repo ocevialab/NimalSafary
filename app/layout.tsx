@@ -20,10 +20,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nimal Safari",
-  description: "Experience the Wild Like Never Before",
+  metadataBase: new URL("https://nimalsafari.com"),
+  title: {
+    default: "Nimal Safari | Best Safari Agency in Sri Lanka",
+    template: "%s | Nimal Safari",
+  },
+  description:
+    "Book the best safari in Sri Lanka with Nimal Safari. Expert-guided Yala safari, Udawalawa safari & more. Trusted Sri Lanka safari agency based in Tissamaharama.",
   icons: {
-    icon: "/favicon.ico", // or "/favicon.png"
+    icon: "/favicon.ico",
+  },
+  openGraph: {
+    siteName: "Nimal Safari",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@nimalsafari",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -42,13 +60,8 @@ export default function RootLayout({
         {children}
         <Footer />
 
-        {/*
-          Add the GoogleAnalytics component here.
-          Replace 'G-VLXEQQL4J7' with your actual Measurement ID.
-          This will inject the Google Analytics script for every page.
-        */}
+        <GoogleAnalytics gaId="G-VLXEQQL4J7" />
       </body>
-      <GoogleAnalytics gaId="G-VLXEQQL4J7" />
     </html>
   );
 }

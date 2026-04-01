@@ -2,15 +2,29 @@ import type { Metadata } from "next";
 import SafarisClient from "./SafarisClient";
 
 export const metadata: Metadata = {
-  // Use a descriptive title for this specific page
-  title: "Sri Lanka Safari Tours & Packages | Nimal Safari",
-
-  // Choose your preferred meta description from the options above
+  title: "Sri Lanka Safari Packages | Yala, Udawalawa & More",
   description:
-    "Explore the best safari tours and packages in Sri Lanka. From leopard safaris in Yala to elephant tours in Udawalawe, find your perfect wildlife adventure with our expert guides. and many more. Book your unforgettable safari experience today! including Yala, Udawalawa, Bundala, and Lunugamwehera National Parks.",
-
+    "Browse expert-guided safari packages in Sri Lanka. Yala safari, Udawalawa safari, Bundala & Lunugamwehera tours. Book your Sri Lanka wildlife adventure with Nimal Safari today.",
   keywords:
-    "safari tours, safari packages, morning safari, Yala, Udawalawe, Bundala, Lunugamwehera, booking safari Sri Lanka, wildlife tours, Yala National Park, Udawalawe National Park, Bundala National Park, Lunugamwehera National Park, leopard safari, elephant safari, birdwatching tours, wildlife adventure, nature tours, eco-tourism, Sri Lanka wildlife",
+    "sri lanka safari packages, safari in sri lanka, yala safari, udawalawa safari, bundala safari, lunugamwehera safari, sri lanka safari agency, wildlife tours sri lanka, safari booking, morning safari sri lanka, leopard safari, elephant safari",
+  alternates: {
+    canonical: "https://nimalsafari.com/safaris",
+  },
+  openGraph: {
+    title: "Sri Lanka Safari Packages | Yala, Udawalawa & More",
+    description:
+      "Browse expert-guided safari packages in Sri Lanka. Yala safari, Udawalawa safari, Bundala & Lunugamwehera tours. Book your wildlife adventure today.",
+    url: "https://nimalsafari.com/safaris",
+    images: [{ url: "/og-safaris.jpg", width: 1200, height: 630, alt: "Safari Packages in Sri Lanka" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sri Lanka Safari Packages | Yala, Udawalawa & More",
+    description:
+      "Browse expert-guided safari packages in Sri Lanka — Yala, Udawalawa, Bundala & Lunugamwehera.",
+    images: ["/og-safaris.jpg"],
+  },
 };
 
 const Page = () => {
