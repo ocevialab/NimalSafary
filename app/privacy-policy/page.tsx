@@ -344,12 +344,12 @@ export default function PrivacyPolicyPage() {
             <p>
               Website:{" "}
               <a
-                href="https://www.nimalsafari.lk"
+                href="https://nimalsafari.com/contact"
                 className="text-primary underline underline-offset-2"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                www.nimalsafari.lk
+                www.nimalsafari.com : contact page
               </a>
             </p>
           </section>
