@@ -49,7 +49,7 @@ const Footer = () => {
           </button>
         </div>
         <div className="lg:flex-row flex flex-col lg:text-md md:text-sm text-xs lg:mt-8 md:mt-6 sm:mt-4 mt-2 lg:justify-between items-center gap-8 text-center">
-          <div className="flex-row flex  gap-4 md:gap-4 lg:gap-6 xl:gap-8">
+          <div className="flex-row flex flex-wrap justify-center gap-x-4 gap-y-2 md:gap-4 lg:gap-6 xl:gap-8">
             <Link href={"/"} className="cursor-pointer hover:text-accent">
               Home
             </Link>
@@ -76,6 +76,18 @@ const Footer = () => {
               className="cursor-pointer hover:text-accent"
             >
               Terms & Conditions
+            </Link>
+            <Link
+              href={"/privacy-policy"}
+              className="cursor-pointer hover:text-accent"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href={"/refund-policy"}
+              className="cursor-pointer hover:text-accent"
+            >
+              Refund Policy
             </Link>
           </div>
           <div className="w-fit flex flex-row px-6 mt-4 justify-center gap-6 sm:gap-10">
