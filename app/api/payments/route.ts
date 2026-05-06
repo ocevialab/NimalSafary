@@ -1,0 +1,148 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "@/lib/auth";
+import {
+  createPaymentRequest,
+  listPaymentRequests,
+  PARKS,
+  SAFARI_TYPES,
+  TIME_SLOTS,
+  MEAL_PLANS,
+  MEAL_PREFERENCES,
+  type Park,
+  type SafariType,
+  type TimeSlot,
+  type MealPlan,
+  type MealPreference,
+} from "@/lib/payment-storage";
+
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  return NextResponse.json(listPaymentRequests());
+}
+
+export async function POST(request: NextRequest) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const body = await request.json();
+    const {
+      customerName,
+      email,
+      phone,
+      packageName,
+      park,
+      safariType,
+      timeSlot,
+      mealPlan,
+      mealPreference,
+      safariDate,
+      guests,
+      notes,
+      amount,
+      currency,
+      expiresInHours,
+    } = body ?? {};
+
+    if (!customerName || typeof customerName !== "string") {
+      return NextResponse.json(
+        { error: "customerName is required" },
+        { status: 400 },
+      );
+    }
+
+    const amountNumber = Number(amount);
+    if (!Number.isFinite(amountNumber) || amountNumber <= 0) {
+      return NextResponse.json(
+        { error: "amount must be a positive number (major units, e.g. 1500.00)" },
+        { status: 400 },
+      );
+    }
+
+    const amountMinor = Math.round(amountNumber * 100);
+
+    const cur = (currency ?? "LKR").toString().toUpperCase();
+    if (cur !== "LKR" && cur !== "USD") {
+      return NextResponse.json(
+        { error: "currency must be LKR or USD" },
+        { status: 400 },
+      );
+    }
+
+    const validateEnum = <T extends string>(
+      value: unknown,
+      allowed: readonly T[],
+      field: string,
+    ): T | undefined | NextResponse => {
+      if (value === undefined || value === null || value === "") return undefined;
+      if (!allowed.includes(value as T)) {
+        return NextResponse.json(
+          { error: `${field} must be one of: ${allowed.join(", ")}` },
+          { status: 400 },
+        );
+      }
+      return value as T;
+    };
+
+    const validPark = validateEnum<Park>(park, PARKS, "park");
+    if (validPark instanceof NextResponse) return validPark;
+    const validSafariType = validateEnum<SafariType>(
+      safariType,
+      SAFARI_TYPES,
+      "safariType",
+    );
+    if (validSafariType instanceof NextResponse) return validSafariType;
+    const validTimeSlot = validateEnum<TimeSlot>(
+      timeSlot,
+      TIME_SLOTS,
+      "timeSlot",
+    );
+    if (validTimeSlot instanceof NextResponse) return validTimeSlot;
+    const validMealPlan = validateEnum<MealPlan>(
+      mealPlan,
+      MEAL_PLANS,
+      "mealPlan",
+    );
+    if (validMealPlan instanceof NextResponse) return validMealPlan;
+    const validMealPref = validateEnum<MealPreference>(
+      mealPreference,
+      MEAL_PREFERENCES,
+      "mealPreference",
+    );
+    if (validMealPref instanceof NextResponse) return validMealPref;
+
+    const pr = createPaymentRequest({
+      customerName: customerName.trim(),
+      email: email?.trim() || undefined,
+      phone: phone?.trim() || undefined,
+      packageName: packageName?.trim() || undefined,
+      park: validPark,
+      safariType: validSafariType,
+      timeSlot: validTimeSlot,
+      mealPlan: validMealPlan,
+      mealPreference: validMealPref,
+      safariDate: safariDate?.trim() || undefined,
+      guests: guests ? Number(guests) : undefined,
+      notes: notes?.trim() || undefined,
+      amount: amountMinor,
+      currency: cur,
+      expiresInHours: expiresInHours ? Number(expiresInHours) : undefined,
+      createdBy: session.username,
+    });
+
+    return NextResponse.json(pr, { status: 201 });
+  } catch (err) {
+    console.error("Create payment request error:", err);
+    return NextResponse.json(
+      { error: "Failed to create payment request" },
+      { status: 500 },
+    );
+  }
+}

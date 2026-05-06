@@ -3,7 +3,26 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { FiLayout, FiFileText, FiPlus, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
+import { FiLayout, FiFileText, FiPlus, FiLogOut, FiMenu, FiX, FiCreditCard } from 'react-icons/fi';
+
+function EnvBadge() {
+  const env = process.env.NEXT_PUBLIC_APP_ENV;
+  if (!env || env === 'production') return null;
+  const label = env.toUpperCase();
+  const isQa = env === 'qa';
+  return (
+    <div
+      className={`mt-3 inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-bold ${
+        isQa
+          ? 'bg-orange-100 text-orange-800 border border-orange-300'
+          : 'bg-yellow-100 text-yellow-900 border border-yellow-300'
+      }`}
+      title="OnePay is using the sandbox — no real money will move."
+    >
+      {label} · SANDBOX
+    </div>
+  );
+}
 
 export default function AdminLayout({
   children,
@@ -65,6 +84,8 @@ export default function AdminLayout({
     { href: '/admin/dashboard', label: 'Dashboard', icon: FiLayout },
     { href: '/admin/dashboard/blogs', label: 'View Blogs', icon: FiFileText },
     { href: '/admin/dashboard/blogs/create', label: 'Create Blog', icon: FiPlus },
+    { href: '/admin/dashboard/payments', label: 'Payments', icon: FiCreditCard },
+    { href: '/admin/dashboard/payments/create', label: 'New Payment Link', icon: FiPlus },
   ];
 
   return (
@@ -91,7 +112,8 @@ export default function AdminLayout({
             {/* Logo/Header */}
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold text-primary">Admin Panel</h2>
-              <p className="text-sm text-gray-500 mt-1">Blog Management</p>
+              <p className="text-sm text-gray-500 mt-1">Blog & Payments</p>
+              <EnvBadge />
             </div>
 
             {/* Navigation */}

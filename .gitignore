@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local sqlite db (production DB lives outside repo, e.g. /var/lib/nimalsafari/data)
+/data/app.db
+/data/app.db-journal
+/data/app.db-wal
+/data/app.db-shm
