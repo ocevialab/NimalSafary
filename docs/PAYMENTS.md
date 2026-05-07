@@ -67,7 +67,7 @@ Next.js loads `.env.local` only in dev; on QA/production it loads `.env`.
 | `ONEPAY_APP_TOKEN` | From OnePay merchant portal (sent as `Authorization` header) |
 | `ONEPAY_HASH_SALT` | From OnePay merchant portal, used for SHA256 signature |
 | `DATABASE_PATH` | Persistent DB location on the VPS |
-| `ONEPAY_API_URL` | *(optional)* override if OnePay gave you a merchant-specific URL |
+| `ONEPAY_API_URL` | *(optional)* override; default is `https://api.onepay.lk/v3/checkout/link/`. OnePay’s docs mention `api-sandbox.onepay.lk`, but that hostname does not resolve in DNS — use **sandbox credentials** from the portal with the production API host. |
 
 ### Visual sanity-check
 

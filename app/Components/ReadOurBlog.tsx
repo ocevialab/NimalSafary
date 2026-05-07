@@ -190,11 +190,31 @@ function ReadOurBlog() {
     });
   };
 
-  // Don't render if loading or no blogs
   if (loading) {
     return (
       <section className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24 bg-background font-display">
-        <div className="text-center text-primary">Loading blogs...</div>
+        {/* Header skeleton */}
+        <div className="flex items-center gap-4 mb-12 animate-pulse">
+          <div className="h-0.5 w-24 bg-gray-300 rounded" />
+          <div className="h-5 w-36 bg-gray-200 rounded" />
+        </div>
+        {/* Card skeleton */}
+        <div className="relative max-w-[85%] mx-auto rounded-3xl overflow-hidden shadow-2xl mx-12 sm:mx-16 md:mx-20 animate-pulse">
+          <div className="flex flex-col md:flex-row h-[500px] sm:h-[550px] md:h-[600px]">
+            <div className="flex-1 flex flex-col justify-center p-10 bg-white space-y-4">
+              <div className="h-6 w-24 bg-gray-200 rounded-full" />
+              <div className="h-8 w-3/4 bg-gray-200 rounded" />
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-100 rounded w-full" />
+                <div className="h-4 bg-gray-100 rounded w-5/6" />
+                <div className="h-4 bg-gray-100 rounded w-4/6" />
+              </div>
+              <div className="h-4 w-48 bg-gray-100 rounded" />
+              <div className="h-10 w-32 bg-gray-200 rounded-full" />
+            </div>
+            <div className="w-full md:w-1/2 h-64 md:h-full bg-gray-200" />
+          </div>
+        </div>
       </section>
     );
   }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FiPlus, FiRefreshCw } from "react-icons/fi";
+import { Spinner, SkTableRow } from "@/app/Components/Skeleton";
 
 interface PaymentRequest {
   id: string;
@@ -67,9 +68,12 @@ export default function PaymentsListPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={load}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            disabled={loading}
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-60"
           >
-            <FiRefreshCw size={16} />
+            {loading
+              ? <Spinner size={16} className="text-gray-500" />
+              : <FiRefreshCw size={16} />}
             Refresh
           </button>
           <Link
@@ -84,7 +88,20 @@ export default function PaymentsListPage() {
 
       <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
         {loading ? (
-          <div className="p-12 text-center text-gray-500">Loading...</div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
+                <tr>
+                  {["Customer","Package","Amount","Status","Created","Expires","Action"].map(h => (
+                    <th key={h} className="text-left px-4 py-3">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[...Array(5)].map((_, i) => <SkTableRow key={i} cols={7} />)}
+              </tbody>
+            </table>
+          </div>
         ) : rows.length === 0 ? (
           <div className="p-12 text-center text-gray-500">
             No payment links yet. Click{" "}

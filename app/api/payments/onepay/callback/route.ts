@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  getPaymentRequestById,
+  getPaymentRequestByShortRef,
   recordPaymentAndSetStatus,
 } from "@/lib/payment-storage";
 import {
   mapOnePayStatus,
+  verifyOnePayCallbackToken,
   verifyWebhookSignature,
   type OnePayWebhookPayload,
 } from "@/lib/onepay";
@@ -12,67 +13,98 @@ import {
 export const dynamic = "force-dynamic";
 
 /**
- * OnePay server-to-server webhook (aka "IPG notify URL").
+ * OnePay server-to-server webhook (portal "Callback URL").
  *
- * This endpoint is the single source of truth for payment status — the
- * browser redirect back from OnePay is treated as display-only.
+ * Supports:
+ * 1) Signed payloads (signature + ipg_transaction_id + …) per older IPG flows.
+ * 2) Docs-style JSON + portal Callback Token (ONEPAY_CALLBACK_TOKEN), when set.
  *
- * Responsibilities:
- *   1. Parse + verify signature.
- *   2. Match the request (our `reference` = payment_requests.id).
- *   3. Confirm the amount equals what we stored.
- *   4. Atomically record the payment and flip the request status.
- *   5. Always respond 200 quickly (even on duplicates) so OnePay doesn't retry
- *      forever.
+ * Docs sample omits `reference`; real callbacks may still include it. If there
+ * is no reference we cannot match a payment_request — we return 200 to avoid
+ * infinite retries and log a warning.
  */
 export async function POST(request: NextRequest) {
+  console.log("[webhook] ← callback received from OnePay");
+
   let payload: OnePayWebhookPayload;
   try {
     payload = (await request.json()) as OnePayWebhookPayload;
   } catch {
+    console.error("[webhook] invalid JSON body");
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  if (!verifyWebhookSignature(payload)) {
-    console.warn("[onepay] webhook signature mismatch", payload);
-    return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
-  }
+  console.log(
+    `[webhook] payload  ref="${payload.reference ?? ""}"  status="${payload.status ?? ""}"  txn="${payload.ipg_transaction_id ?? payload.transaction_id ?? ""}"`,
+  );
 
-  const reference = String(payload.reference ?? "");
+  const signedOk = verifyWebhookSignature(payload);
+  const tokenOk = verifyOnePayCallbackToken(request, payload);
+
+  if (!signedOk && !tokenOk) {
+    console.warn(
+      "[webhook] ✗ unauthorized — no valid signature or callback token",
+    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  console.log(`[webhook] auth ok  signed=${signedOk}  token=${tokenOk}`);
+
+  const reference = String(payload.reference ?? "").trim();
   if (!reference) {
-    return NextResponse.json({ error: "Missing reference" }, { status: 400 });
+    console.warn(
+      "[webhook] missing reference — cannot match payment request",
+      payload,
+    );
+    return NextResponse.json({ ok: true });
   }
 
-  const pr = getPaymentRequestById(reference);
+  const pr = getPaymentRequestByShortRef(reference);
   if (!pr) {
-    console.warn("[onepay] webhook for unknown reference", reference);
+    console.warn("[webhook] unknown short_ref:", reference);
     return NextResponse.json({ error: "Unknown reference" }, { status: 404 });
   }
 
-  const gatewayStatus = mapOnePayStatus(payload.status);
+  console.log(
+    `[webhook] matched payment request  ref=${reference}  customer="${pr.customerName}"`,
+  );
 
-  const amountMajor = Number(payload.amount ?? 0);
-  const expectedMajor = pr.amount / 100;
-  if (
-    gatewayStatus === "SUCCESS" &&
-    Math.abs(amountMajor - expectedMajor) > 0.01
-  ) {
-    console.error(
-      `[onepay] amount mismatch for ${reference}: got ${amountMajor}, expected ${expectedMajor}`,
-    );
-    return NextResponse.json({ error: "Amount mismatch" }, { status: 400 });
-  }
+  const gatewayStatus = mapOnePayStatus(
+    payload.status,
+    payload.status_message,
+  );
 
-  const txnId = String(payload.ipg_transaction_id ?? "");
+  console.log(`[webhook] gateway status → ${gatewayStatus}`);
+
+  const txnId = String(
+    payload.ipg_transaction_id ?? payload.transaction_id ?? "",
+  ).trim();
   if (!txnId) {
+    console.error("[webhook] missing transaction id");
     return NextResponse.json(
-      { error: "Missing ipg_transaction_id" },
+      { error: "Missing transaction id" },
       { status: 400 },
     );
   }
 
+  let amountMajor: number;
+  if (payload.amount != null && String(payload.amount).trim() !== "") {
+    amountMajor = Number(payload.amount);
+  } else {
+    amountMajor = pr.amount / 100;
+  }
+
+  if (
+    gatewayStatus === "SUCCESS" &&
+    Math.abs(amountMajor - pr.amount / 100) > 0.01
+  ) {
+    console.error(
+      `[webhook] ✗ amount mismatch  ref=${reference}  received=${amountMajor}  expected=${pr.amount / 100}`,
+    );
+    return NextResponse.json({ error: "Amount mismatch" }, { status: 400 });
+  }
+
   try {
-    recordPaymentAndSetStatus({
+    const { recorded } = recordPaymentAndSetStatus({
       paymentRequestId: pr.id,
       transactionId: txnId,
       status: gatewayStatus,
@@ -80,8 +112,17 @@ export async function POST(request: NextRequest) {
       currency: pr.currency,
       rawResponse: JSON.stringify(payload),
     });
+    if (recorded) {
+      console.log(
+        `[webhook] ✓ payment recorded  ref=${reference}  txn=${txnId}  status=${gatewayStatus}`,
+      );
+    } else {
+      console.log(
+        `[webhook] duplicate webhook ignored  ref=${reference}  txn=${txnId}`,
+      );
+    }
   } catch (err) {
-    console.error("[onepay] failed to record payment:", err);
+    console.error("[webhook] ✗ failed to record payment:", err);
     return NextResponse.json(
       { error: "Internal error" },
       { status: 500 },

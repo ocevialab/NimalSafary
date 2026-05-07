@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Spinner } from "@/app/Components/Skeleton";
 
 export default function PayNowButton({ token }: { token: string }) {
   const [loading, setLoading] = useState(false);
@@ -34,8 +35,9 @@ export default function PayNowButton({ token }: { token: string }) {
       <button
         onClick={pay}
         disabled={loading}
-        className="w-full bg-accent hover:bg-accent/90 text-muted font-bold text-lg py-4 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-3 bg-accent hover:bg-accent/90 text-muted font-bold text-lg py-4 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
+        {loading && <Spinner size={22} className="text-muted" />}
         {loading ? "Redirecting to OnePay..." : "Pay Now"}
       </button>
     </div>

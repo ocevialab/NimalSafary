@@ -27,6 +27,8 @@ export default function StatusClient({ token }: { token: string }) {
   const [data, setData] = useState<PublicPayment | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const [timedOut, setTimedOut] = useState(false);
+
   useEffect(() => {
     let cancelled = false;
     let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -40,9 +42,10 @@ export default function StatusClient({ token }: { token: string }) {
         if (cancelled) return;
         setData(json);
         attempts += 1;
-        // Keep polling while pending, up to ~30 polls (~60s).
         if (json.status === "PENDING" && attempts < 30) {
           timeout = setTimeout(tick, 2000);
+        } else if (json.status === "PENDING") {
+          setTimedOut(true);
         }
       } catch (err) {
         if (cancelled) return;
@@ -123,6 +126,36 @@ export default function StatusClient({ token }: { token: string }) {
         title="Link Expired"
         intent="error"
         body="This payment link has expired. Please contact Nimal Safari for a new link."
+      />
+    );
+  }
+
+  if (timedOut) {
+    return (
+      <Shell
+        title="Still confirming..."
+        intent="pending"
+        body={
+          <>
+            We haven&apos;t received a confirmation from OnePay yet. Your
+            payment may still be processing.
+            <br />
+            <br />
+            Please{" "}
+            <button
+              onClick={() => {
+                setTimedOut(false);
+                setData(null);
+                window.location.reload();
+              }}
+              className="text-accent font-semibold underline"
+            >
+              refresh this page
+            </button>{" "}
+            in a minute, or contact us if you were charged and the status
+            hasn&apos;t updated.
+          </>
+        }
       />
     );
   }

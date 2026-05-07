@@ -5,6 +5,11 @@ import crypto from "crypto";
  *
  * Docs reference (as used when building this module):
  *   POST https://api.onepay.lk/v3/checkout/link/
+ *
+ * NOTE: OnePay docs mention https://api-sandbox.onepay.lk for sandbox, but that
+ * hostname does not resolve in public DNS (NXDOMAIN). Sandbox vs live is
+ * determined by the App ID / token / hash from the merchant portal (sandbox
+ * IPG app credentials on the same production API host).
  *   Headers:
  *     Authorization: <APP_TOKEN>
  *     Content-Type:  application/json
@@ -12,7 +17,8 @@ import crypto from "crypto";
  *   their snake_case):
  *     currency, app_id, hash, amount, reference,
  *     customer_first_name, customer_last_name, customer_phone_number,
- *     customer_email, transaction_redirect_url, additional_data
+ *     customer_email, transaction_redirect_url, additionalData (optional),
+ *     items (optional)
  *
  * Hash formula (sandbox & production, per OnePay docs):
  *     SHA256(app_id + currency + amount_as_string + hash_salt)
@@ -37,16 +43,19 @@ export interface OnePayEnv {
  * QA runs a production build on a staging server — from Node's perspective
  * both QA and production are NODE_ENV=production, so we need our own flag.
  *
- *   development -> sandbox OnePay
- *   qa          -> sandbox OnePay
- *   production  -> live OnePay
+ *   development -> sandbox *credentials* (same API host as production)
+ *   qa          -> sandbox *credentials*
+ *   production  -> live *credentials*
  */
 export type AppEnv = "development" | "qa" | "production";
 
+/** Single checkout endpoint; sandbox/live is chosen by credentials, not hostname. */
+const ONEPAY_CHECKOUT_URL = "https://api.onepay.lk/v3/checkout/link/";
+
 const ONEPAY_ENDPOINTS: Record<AppEnv, string> = {
-  development: "https://sandbox.onepay.lk/v3/checkout/link/",
-  qa:          "https://sandbox.onepay.lk/v3/checkout/link/",
-  production:  "https://api.onepay.lk/v3/checkout/link/",
+  development: ONEPAY_CHECKOUT_URL,
+  qa: ONEPAY_CHECKOUT_URL,
+  production: ONEPAY_CHECKOUT_URL,
 };
 
 export function resolveAppEnv(): AppEnv {
@@ -63,7 +72,11 @@ export function getOnePayEnv(): OnePayEnv {
   const appEnv = resolveAppEnv();
   // ONEPAY_API_URL acts as an explicit override (e.g. for OnePay giving you a
   // merchant-specific endpoint). Otherwise we pick based on APP_ENV.
-  const apiUrl = process.env.ONEPAY_API_URL || ONEPAY_ENDPOINTS[appEnv];
+  const rawUrl = process.env.ONEPAY_API_URL || ONEPAY_ENDPOINTS[appEnv];
+  // Docs mention api-sandbox.onepay.lk but it does not exist in public DNS.
+  const apiUrl = rawUrl
+    .replace(/^https:\/\/api-sandbox\.onepay\.lk/i, "https://api.onepay.lk")
+    .replace(/^https:\/\/sandbox\.onepay\.lk/i, "https://api.onepay.lk");
   const appId = process.env.ONEPAY_APP_ID;
   const appToken = process.env.ONEPAY_APP_TOKEN;
   const hashSalt = process.env.ONEPAY_HASH_SALT;
@@ -96,7 +109,7 @@ export function signCheckoutRequest(args: {
 }
 
 export interface CheckoutRequest {
-  reference: string;              // our payment_request id (or token)
+  reference: string;              // OnePay max 21 chars — caller must truncate/shorten
   amountMinor: number;
   currency: string;               // "LKR" | "USD"
   customer: {
@@ -120,35 +133,63 @@ export async function createCheckoutLink(
   req: CheckoutRequest,
 ): Promise<CheckoutResponse> {
   const env = getOnePayEnv();
-  const amount = formatAmount(req.amountMinor);
+  const amountStr = formatAmount(req.amountMinor);
   const hash = signCheckoutRequest({
     appId: env.appId,
     currency: req.currency,
-    amount,
+    amount: amountStr,
     hashSalt: env.hashSalt,
   });
+
+  // Docs: https://docs.onepay.lk — redirect URL must be HTTPS.
+  if (
+    !req.redirectUrl.startsWith("https://") &&
+    process.env.ONEPAY_ALLOW_HTTP_REDIRECT !== "1"
+  ) {
+    throw new Error(
+      "OnePay requires transaction_redirect_url to use HTTPS. " +
+        "Set PUBLIC_APP_URL to an https URL (e.g. ngrok) for local testing, " +
+        "or set ONEPAY_ALLOW_HTTP_REDIRECT=1 only for temporary debugging.",
+    );
+  }
+
+  // Official docs specify amount as a JSON number with two decimal places.
+  const amountNum = Number(amountStr);
 
   const body: Record<string, unknown> = {
     currency: req.currency,
     app_id: env.appId,
     hash,
-    amount: Number(amount),
+    amount: amountNum,
     reference: req.reference,
     customer_first_name: req.customer.firstName,
     customer_last_name: req.customer.lastName,
     customer_phone_number: req.customer.phone,
     customer_email: req.customer.email,
     transaction_redirect_url: req.redirectUrl,
-    additional_data: req.additionalData ?? "",
   };
-  if (req.notifyUrl) {
+  if (req.additionalData?.trim()) {
+    body.additionalData = req.additionalData.trim();
+  }
+  // Optional server-to-server notify URL. Not in the public PHP SDK schema;
+  // some merchant plans accept it — enable only if OnePay confirms the key.
+  if (
+    req.notifyUrl &&
+    process.env.ONEPAY_SEND_NOTIFY_URL_IN_CHECKOUT === "1"
+  ) {
     body.ipg_notify_url = req.notifyUrl;
   }
+
+  console.log(
+    `[onepay] → calling checkout API  ref=${req.reference}  amount=${amountStr} ${req.currency}  url=${env.apiUrl}`,
+  );
+  console.log("[onepay] request body:", JSON.stringify(body));
 
   const res = await fetch(env.apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
       Authorization: env.appToken,
     },
     body: JSON.stringify(body),
@@ -161,10 +202,30 @@ export async function createCheckoutLink(
     data?: {
       gateway?: { redirect_url?: string };
       ipg_transaction_id?: string;
+      ipgTransactionId?: string;
     };
   };
 
-  if (!res.ok || data.status !== 1000 || !data.data?.gateway?.redirect_url) {
+  console.log(
+    `[onepay] ← feedback received  httpStatus=${res.status}  apiStatus=${data.status}  message="${data.message ?? ""}"`,
+  );
+
+  // OnePay returns status 1000 (some docs) or 200 (observed) on success.
+  const apiOk =
+    res.ok && (data.status === 1000 || data.status === 200) && !!data.data;
+
+  const redirectUrl =
+    data.data?.gateway?.redirect_url ??
+    (data.data as Record<string, unknown> | undefined)?.[
+      "redirect_url"
+    ] as string | undefined;
+
+  if (!apiOk || !redirectUrl) {
+    console.error("[onepay] ✗ checkout link failed", {
+      httpStatus: res.status,
+      apiStatus: data.status,
+      message: data.message,
+    });
     throw new Error(
       `OnePay checkout link creation failed: ${res.status} ${
         data.message ?? "unknown error"
@@ -172,9 +233,18 @@ export async function createCheckoutLink(
     );
   }
 
+  const ipgTransactionId =
+    data.data?.ipg_transaction_id ??
+    data.data?.ipgTransactionId ??
+    "";
+
+  console.log(
+    `[onepay] ✓ checkout link created  ref=${req.reference}  ipgTxn=${ipgTransactionId}`,
+  );
+
   return {
-    redirectUrl: data.data.gateway.redirect_url,
-    ipgTransactionId: data.data.ipg_transaction_id ?? "",
+    redirectUrl,
+    ipgTransactionId,
     raw: data,
   };
 }
@@ -189,12 +259,39 @@ export async function createCheckoutLink(
  */
 export interface OnePayWebhookPayload {
   ipg_transaction_id?: string;
+  transaction_id?: string;
   status?: number | string;
   amount?: number | string;
   status_message?: string;
   reference?: string;
   signature?: string;
+  callback_token?: string;
   [key: string]: unknown;
+}
+
+/** Whether the request carries the portal "Callback Token" (header or JSON). */
+export function verifyOnePayCallbackToken(
+  request: Request,
+  body: OnePayWebhookPayload,
+): boolean {
+  const secret = process.env.ONEPAY_CALLBACK_TOKEN?.trim();
+  if (!secret) return false;
+
+  const fromBody =
+    typeof body.callback_token === "string" ? body.callback_token.trim() : "";
+  if (fromBody === secret) return true;
+
+  const auth = request.headers.get("authorization")?.trim() ?? "";
+  if (auth === secret) return true;
+  if (/^Bearer\s+/i.test(auth) && auth.replace(/^Bearer\s+/i, "").trim() === secret) {
+    return true;
+  }
+
+  const headerToken =
+    request.headers.get("x-callback-token")?.trim() ??
+    request.headers.get("x-onepay-callback-token")?.trim() ??
+    "";
+  return headerToken === secret;
 }
 
 export function verifyWebhookSignature(payload: OnePayWebhookPayload): boolean {
@@ -229,9 +326,17 @@ export function verifyWebhookSignature(payload: OnePayWebhookPayload): boolean {
  */
 export function mapOnePayStatus(
   raw: unknown,
+  statusMessage?: unknown,
 ): "SUCCESS" | "FAILED" {
+  const msg = String(statusMessage ?? "").trim().toUpperCase();
+  if (msg === "SUCCESS") {
+    return "SUCCESS";
+  }
+  if (typeof raw === "number" && raw === 1) {
+    return "SUCCESS";
+  }
   const s = String(raw ?? "").trim();
-  if (s === "1000" || s === "200" || s.toUpperCase() === "SUCCESS") {
+  if (s === "1" || s === "1000" || s === "200" || s.toUpperCase() === "SUCCESS") {
     return "SUCCESS";
   }
   return "FAILED";

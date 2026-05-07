@@ -304,7 +304,7 @@ export default function CreatePaymentLinkPage() {
               <input
                 type="number"
                 step="0.01"
-                min="1"
+                min="10"
                 name="amount"
                 value={form.amount}
                 onChange={update}

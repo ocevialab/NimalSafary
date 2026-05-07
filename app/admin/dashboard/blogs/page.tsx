@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FiEdit, FiTrash2, FiEye, FiPlus, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Image from 'next/image';
+import { Spinner } from '@/app/Components/Skeleton';
 
 interface BlogPost {
   id: number;
@@ -79,7 +80,40 @@ export default function BlogsList() {
   };
 
   if (loading) {
-    return <div className="text-center py-12">Loading blogs...</div>;
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-primary mb-2">Blog Posts</h1>
+            <p className="text-gray-600">Manage your blog posts</p>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gray-50 border-b border-gray-200">
+                <tr>
+                  {["Image","Title","Category","Date","Actions"].map(h => (
+                    <th key={h} className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {[...Array(5)].map((_, i) => (
+                  <tr key={i} className="animate-pulse">
+                    <td className="px-6 py-4"><div className="w-16 h-16 bg-gray-200 rounded-lg" /></td>
+                    <td className="px-6 py-4 space-y-2"><div className="h-4 bg-gray-200 rounded w-48" /><div className="h-3 bg-gray-100 rounded w-64" /></td>
+                    <td className="px-6 py-4"><div className="h-6 bg-gray-200 rounded-full w-20" /></td>
+                    <td className="px-6 py-4"><div className="h-4 bg-gray-100 rounded w-24" /></td>
+                    <td className="px-6 py-4"><div className="h-8 bg-gray-100 rounded w-24" /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -186,7 +220,9 @@ export default function BlogsList() {
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
                             title="Delete"
                           >
-                            <FiTrash2 size={18} />
+                            {deletingId === blog.id
+                              ? <Spinner size={18} className="text-red-500" />
+                              : <FiTrash2 size={18} />}
                           </button>
                         </div>
                       </td>

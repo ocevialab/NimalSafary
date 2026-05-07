@@ -7,6 +7,34 @@ import { createCheckoutLink } from "@/lib/onepay";
 
 export const dynamic = "force-dynamic";
 
+/** OnePay rejects empty / invalid email (official PHP SDK validates like PHP filter_var). */
+const LOOSE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** E.164 per OnePay docs, e.g. +94771234567 */
+function contactForOnePay(pr: { email: string | null; phone: string | null }) {
+  const rawEmail = pr.email?.trim() ?? "";
+  const email =
+    rawEmail && LOOSE_EMAIL.test(rawEmail)
+      ? rawEmail
+      : (process.env.ONEPAY_PLACEHOLDER_EMAIL?.trim() ??
+        "bookings@nimalsafari.com");
+
+  let rawPhone = pr.phone?.replace(/\s/g, "") ?? "";
+  if (rawPhone.startsWith("0") && rawPhone.length >= 9) {
+    rawPhone = `+94${rawPhone.slice(1)}`;
+  }
+  if (rawPhone && !rawPhone.startsWith("+")) {
+    rawPhone = `+${rawPhone}`;
+  }
+
+  const phone =
+    rawPhone.length >= 10
+      ? rawPhone
+      : (process.env.ONEPAY_PLACEHOLDER_PHONE?.trim() ?? "+940000000000");
+
+  return { email, phone };
+}
+
 /**
  * Customer-initiated: build an OnePay checkout link for a pending request
  * and return the redirect URL. The amount is always read from the DB, never
@@ -24,6 +52,9 @@ export async function POST(
 
   const pr = refreshExpiryIfNeeded(raw);
   if (pr.status !== "PENDING" && pr.status !== "FAILED") {
+    console.warn(
+      `[initiate] blocked — link ${pr.shortRef} is already ${pr.status}`,
+    );
     return NextResponse.json(
       { error: `This payment link is ${pr.status.toLowerCase()}.` },
       { status: 409 },
@@ -35,39 +66,53 @@ export async function POST(
   const firstName = parts[0] ?? "Customer";
   const lastName = parts.slice(1).join(" ") || "-";
 
+  const { email, phone } = contactForOnePay(pr);
+
   const origin =
     process.env.PUBLIC_APP_URL?.replace(/\/$/, "") ||
     new URL(request.url).origin;
   const redirectUrl = `${origin}/pay/${pr.token}/status`;
 
+  console.log(
+    `[initiate] starting payment  ref=${pr.shortRef}  customer="${pr.customerName}"  amount=${pr.amount / 100} ${pr.currency}`,
+  );
+
   try {
     const notifyUrl = `${origin}/api/payments/onepay/callback`;
 
     const checkout = await createCheckoutLink({
-      reference: pr.id,
+      reference: pr.shortRef,  // OnePay max 21 chars
       amountMinor: pr.amount,
       currency: pr.currency,
       customer: {
         firstName,
         lastName,
-        phone: pr.phone ?? "",
-        email: pr.email ?? "",
+        phone,
+        email,
       },
       redirectUrl,
       notifyUrl,
       additionalData: pr.packageName ?? undefined,
     });
 
+    console.log(
+      `[initiate] ✓ redirect ready  ref=${pr.shortRef}  ipgTxn=${checkout.ipgTransactionId}`,
+    );
+
     return NextResponse.json({
       redirectUrl: checkout.redirectUrl,
       ipgTransactionId: checkout.ipgTransactionId,
     });
   } catch (err) {
-    console.error("OnePay initiate error:", err);
+    console.error(`[initiate] ✗ failed  ref=${pr.shortRef}`, err);
+    const message =
+      err instanceof Error ? err.message : "Could not start payment.";
     return NextResponse.json(
       {
         error:
-          "Could not start payment. Please try again or contact the operator.",
+          message.includes("OnePay") || message.includes("HTTPS")
+            ? message
+            : "Could not start payment. Please try again or contact the operator.",
       },
       { status: 502 },
     );

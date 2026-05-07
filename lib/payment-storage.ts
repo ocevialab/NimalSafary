@@ -93,6 +93,7 @@ export const MEAL_PREFERENCE_LABELS: Record<MealPreference, string> = {
 
 export interface PaymentRequest {
   id: string;
+  shortRef: string;              // ≤21 chars, sent to OnePay as `reference`
   token: string;
   customerName: string;
   email: string | null;
@@ -128,6 +129,7 @@ export interface Payment {
 
 type DbPaymentRequestRow = {
   id: string;
+  short_ref: string;
   token: string;
   customer_name: string;
   email: string | null;
@@ -165,6 +167,7 @@ function mapRequest(row: DbPaymentRequestRow | undefined): PaymentRequest | null
   if (!row) return null;
   return {
     id: row.id,
+    shortRef: row.short_ref,
     token: row.token,
     customerName: row.customer_name,
     email: row.email,
@@ -221,10 +224,16 @@ export interface CreatePaymentRequestInput {
   createdBy: string;
 }
 
+/** Generate a ≤21-char reference safe to send as OnePay `reference`. */
+function makeShortRef(id: string): string {
+  return id.replace(/-/g, "").slice(0, 21);
+}
+
 export function createPaymentRequest(
   input: CreatePaymentRequestInput,
 ): PaymentRequest {
   const id = crypto.randomUUID();
+  const shortRef = makeShortRef(id);
   const token = crypto.randomBytes(24).toString("base64url");
   const now = new Date();
   const expires = new Date(
@@ -242,16 +251,17 @@ export function createPaymentRequest(
   const db = getDb();
   db.prepare(
     `INSERT INTO payment_requests (
-      id, token, customer_name, email, phone, package_name, park,
+      id, short_ref, token, customer_name, email, phone, package_name, park,
       safari_type, time_slot, meal_plan, meal_preference, safari_date,
       guests, notes, amount, currency, status, expires_at, created_at,
       created_by
-    ) VALUES (@id, @token, @customer_name, @email, @phone, @package_name,
-      @park, @safari_type, @time_slot, @meal_plan, @meal_preference,
-      @safari_date, @guests, @notes, @amount, @currency, 'PENDING',
-      @expires_at, @created_at, @created_by)`,
+    ) VALUES (@id, @short_ref, @token, @customer_name, @email, @phone,
+      @package_name, @park, @safari_type, @time_slot, @meal_plan,
+      @meal_preference, @safari_date, @guests, @notes, @amount, @currency,
+      'PENDING', @expires_at, @created_at, @created_by)`,
   ).run({
     id,
+    short_ref: shortRef,
     token,
     customer_name: input.customerName,
     email: input.email ?? null,
@@ -286,6 +296,15 @@ export function getPaymentRequestByToken(token: string): PaymentRequest | null {
   const row = getDb()
     .prepare("SELECT * FROM payment_requests WHERE token = ?")
     .get(token) as DbPaymentRequestRow | undefined;
+  return mapRequest(row);
+}
+
+export function getPaymentRequestByShortRef(
+  shortRef: string,
+): PaymentRequest | null {
+  const row = getDb()
+    .prepare("SELECT * FROM payment_requests WHERE short_ref = ?")
+    .get(shortRef) as DbPaymentRequestRow | undefined;
   return mapRequest(row);
 }
 

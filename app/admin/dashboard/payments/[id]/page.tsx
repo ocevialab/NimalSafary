@@ -10,6 +10,7 @@ import {
   MEAL_PREFERENCE_LABELS,
 } from "@/lib/payment-storage";
 import PaymentLinkCopy from "./PaymentLinkCopy";
+import StatusOverride from "./StatusOverride";
 
 export const dynamic = "force-dynamic";
 
@@ -139,6 +140,8 @@ export default async function PaymentDetailPage(
           />
         </dl>
       </div>
+
+      <StatusOverride id={pr.id} currentStatus={pr.status} />
 
       <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
         <h2 className="text-lg font-bold text-primary mb-3">

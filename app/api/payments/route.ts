@@ -65,6 +65,13 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
+    // OnePay minimum is ~LKR 10 / USD 0.10 — guard against accidental tiny amounts.
+    if (amountNumber < 10) {
+      return NextResponse.json(
+        { error: "Minimum amount is 10.00 (OnePay rejects amounts below this threshold)" },
+        { status: 400 },
+      );
+    }
 
     const amountMinor = Math.round(amountNumber * 100);
 

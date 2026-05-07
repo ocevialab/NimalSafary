@@ -38,6 +38,7 @@ function initialize(db: Database.Database) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS payment_requests (
       id              TEXT PRIMARY KEY,
+      short_ref       TEXT NOT NULL UNIQUE,
       token           TEXT NOT NULL UNIQUE,
       customer_name   TEXT NOT NULL,
       email           TEXT,
@@ -101,6 +102,15 @@ function initialize(db: Database.Database) {
   }
   if (!hasCol("meal_plan")) {
     db.exec("ALTER TABLE payment_requests ADD COLUMN meal_plan TEXT");
+  }
+  if (!hasCol("short_ref")) {
+    db.exec("ALTER TABLE payment_requests ADD COLUMN short_ref TEXT");
+    db.exec(
+      "UPDATE payment_requests SET short_ref = SUBSTR(REPLACE(id,'-',''),1,21) WHERE short_ref IS NULL",
+    );
+    db.exec(
+      "CREATE UNIQUE INDEX IF NOT EXISTS idx_payment_requests_short_ref ON payment_requests(short_ref)",
+    );
   }
 }
 
